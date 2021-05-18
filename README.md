@@ -1,11 +1,15 @@
 # To Do:
 
-- Mapping between vertices and numbers -> list using indices -> population representation / chromosome representation 
-- Fitness function 
+### Usaid 
+- create bandwidth subclass 
+- modify EA_imp
 
+### Maham
 - experimental analysis 
     - test on 4 graphs
     - create plots 
     - automate using script 
 
-- Report 
+### Maaz
+- Report    
+    - introduction portion 
