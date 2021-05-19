@@ -6,7 +6,7 @@ import copy
 graphs = generate_graphs(files)
 m_Graph = graphs[0]
 
-class graphBandiwdth(EA_imp):
+class graphBandwidth(EA_imp):
     def __init__(self, graph, population_size, offspring_size, generations, mutation_rate, iterations, parent_ss, survivor_ss):
         EA_imp.__init__(self, graph, population_size, offspring_size, generations, 
                         mutation_rate, iterations, parent_ss, survivor_ss)
@@ -38,6 +38,12 @@ class graphBandiwdth(EA_imp):
             self.population.append((chromosome, self.fitness_function(chromosome)))
         # return population
 
+    def createChildfromNum(self, numbering):
+        vertices = list(self.Graph.nodes())
+        child = {i:0 for i in vertices}
+        for key in child.keys():
+            child[key] = numbering[int(key)-1]
+        return child 
 
     def crossover(self, parent: list):
         ### GENERAL METHOD 
@@ -63,7 +69,7 @@ class graphBandiwdth(EA_imp):
         geneB = random.randint(0, size-1)
         startgene = min(geneA, geneB)
         endgene = max(geneA, geneB)
-        print(startgene, endgene)
+        # print(startgene, endgene)
         for i in range(startgene, endgene):
             childAP1.append(numberingA[i])
             childBP1.append(numberingB[i])
@@ -71,9 +77,11 @@ class graphBandiwdth(EA_imp):
         childBP2 = [item for item in numberingB if item not in childBP1]
         child1 = childAP2[:startgene] + childAP1 + childAP2[startgene:]
         child2 = childBP2[:startgene] + childBP1 + childBP2[startgene:]
-        return child1, child2
+        offspring1 = self.createChildfromNum(child1)
+        offspring2 = self.createChildfromNum(child2)
+        return offspring1, offspring2
 
 # lst = [['1','3', '2', '6', '7', '5'], ['5', '4', '7', '6', '1', '3', '2']]
-bandy = graphBandiwdth(m_Graph, 10, 5, 100, 0.1, 10, 'Random', 'Truncation')
+bandy = graphBandwidth(m_Graph, 10, 5, 100, 0.1, 10, 'Random', 'Truncation')
 bandy.init_population()
 print(bandy.crossover([bandy.population[1][0], bandy.population[2][0]]))
