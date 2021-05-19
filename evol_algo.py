@@ -7,7 +7,8 @@ import math
 import copy
 
 class EA_imp():  
-  def __init__(self, population_size, offspring_size, generations, mutation_rate, iterations, parent_ss, survivor_ss, max_min='min'):
+  def __init__(self, graph, population_size, offspring_size, generations, mutation_rate, iterations, parent_ss, survivor_ss, max_min='min'):
+    self.Graph = graph 
     self.population_size = population_size
     self.offspring_size = offspring_size
     self.generations = generations
@@ -97,7 +98,7 @@ class EA_imp():
 
   def crossover_operator_order2(self, parent1, parent2):
     seed()
-    size = len(self.genes)
+    size = len(self.Graph)
     #randomly select two cutoff points which a difference of 40% of the gene size between them
     cutoff1 = randint(0, size-1)
     cutoff2 = randint(0, size-1)
@@ -299,7 +300,7 @@ class EA_imp():
     self.iter_num = 0
     print(self.population)
     while self.iter_num < self.iterations:
-      self.generate_gen1()
+      self.init_population()
       self.gen_num = 0
       while self.gen_num < self.generations:
         self.parent_selection()

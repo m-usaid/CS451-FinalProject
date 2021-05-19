@@ -27,13 +27,13 @@ def draw_graph(G: nx.Graph):
 
 files = [
     'Data/myciel3.col'
-    # 'Data/gcol1.txt'
-    ]
-
+    # 'Data/gcol1.txt',
     # 'Data/myciel4.col',
     # 'Data/gcol23.txt'
+    ]
 
-def generate_graphs(files):
+
+def generate_graphs(files: list):
     graphs = []
     for file in files:
         graphs.append(create_graph(file))
@@ -42,4 +42,4 @@ def generate_graphs(files):
     return graphs 
 
 
-generate_graphs(files)
+# generate_graphs(files)

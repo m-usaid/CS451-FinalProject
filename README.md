@@ -1,8 +1,11 @@
 # To Do:
 
 ### Usaid 
-- create bandwidth subclass 
-- modify EA_imp
+- crossover operation 
+- modify mutation operator 
+- go through selection schema 
+- research on boltzmann selection 
+
 
 ### Maham
 - experimental analysis 
@@ -13,3 +16,4 @@
 ### Maaz
 - Report    
     - introduction portion 
+    - understand template ASAP
