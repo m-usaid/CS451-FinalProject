@@ -45,25 +45,24 @@ class graphBandwidth(EA_imp):
             child[key] = numbering[int(key)-1]
         return child 
 
-    def crossover(self, parent: list):
-        ### GENERAL METHOD 
-        """Crossover method to create child chromosome.
+    def crossover(self, parent1: dict, parent2: dict):
+        """[summary]
 
         Args:
-            parent (list): A list of size 2 containing the parent chromosomes.
+            parent1 (dict): [description]
+            parent2 (dict): [description]
 
         Returns:
-            [list]: 2 offspring chromosome.
-        """
-        
+            [type]: [description]
+        """                       
         childAP1 = []
         childAP2 = []
         childBP1 = []
         childBP2 = []
         child1 = []
         child2 = []
-        numberingA = list(parent[0].values())
-        numberingB = list(parent[1].values())
+        numberingA = list(parent1.values())
+        numberingB = list(parent1.values())
         size = len(numberingA)
         geneA = random.randint(0, size-1)
         geneB = random.randint(0, size-1)
@@ -81,7 +80,23 @@ class graphBandwidth(EA_imp):
         offspring2 = self.createChildfromNum(child2)
         return offspring1, offspring2
 
+    def mutation_operator(self, individual: dict):
+        """[summary]
+
+        Args:
+            individual (dict): [description]
+        """        
+        random.seed()
+        randNum = random.random()
+        if randNum < self.mutation_rate:
+            key1, key2 = random.sample(list(individual), 2)
+            individual[key1], individual[key2] = individual[key2], individual[key1]
+        return individual
+
 # lst = [['1','3', '2', '6', '7', '5'], ['5', '4', '7', '6', '1', '3', '2']]
-bandy = graphBandwidth(m_Graph, 10, 5, 100, 0.1, 10, 'Random', 'Truncation')
-bandy.init_population()
-print(bandy.crossover([bandy.population[1][0], bandy.population[2][0]]))
+bandy = graphBandwidth(m_Graph, 100, 5, 100, 0.1, 10, 'FPS', 'Truncation')
+# bandy.init_population()
+# bandy.parent_selection()
+bandy.run_algo()
+# print(bandy.crossover([bandy.population[1][0], bandy.population[2][0]]))
+
