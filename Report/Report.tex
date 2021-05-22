@@ -420,9 +420,11 @@ The abstract goes here.
 % no \IEEEPARstart
 Bandwidth is a basic, fundamental concept in Graph Theory, relating to almost any and every mathematical property possessed by a graph. The bandwidth of a graph refers to it's minimum bandwidth under any ordering; the bandwidth of the ordering of a graph is the maximum distance between two adjacent vertices.
 \\
-The inception of the Graph Bandwidth Problem, occurred in the 1950s, when structural engineers attempted to analyze steel frameworks by their structural matrices, via computerized manipulation. The term 'bandwidth' was birthed as the engineers had endeavoured to discover a matrix in which all the non-zero elements lay withing a narrow 'band'. The inspiration for this came from operations such as inversion or finding determinant in as little time as possible.
+The inception of the Matrix Bandwidth Problem, occurred in the 1950s, when structural engineers attempted to analyze steel frameworks by their structural matrices, via computerized manipulation. The term 'bandwidth' was birthed as the engineers had endeavoured to discover a matrix in which all the non-zero elements lay withing a narrow 'band'. The inspiration for this came from operations such as inversion or finding determinant in as little time as possible.
 % You must have at least 2 lines in the paragraph with the drop letter
 % (should never be an issue)
+\\
+In 1962, similar to this approach, L.H Harper, and A.W Hales conceived the bandwidth, and bandwidth sum. They used edge differences to represent single errors in a 6-bit picture code, in a hypercube, where it's vertices were words of the code \cite{10.2307/2946514}. Some time after this, R.R Kohrfage initialized his work on the graph bandwidth problem \cite{ccdg1982}. Finally, F. Harary published the problem, as we know it today, officially \cite{https://doi.org/10.1002/bimj.19660080427}.
 \\
 \textbf{Key terms:} Graph Theory, Bandwidth, Evolutionary Algorithms
  
@@ -432,10 +434,15 @@ The inception of the Graph Bandwidth Problem, occurred in the 1950s, when struct
 Let's define the problem in more formal terms with some added notation. 
 The mapping $f$ is defined as $f: V(G) \to \{1, 2, \dots, n\}$, where $n = |V|$ -- also called a \emph{perfect numbering}. \cite{Lee2016} Therefore, 
 we can think of these mappings as essentially orderings of the vertices. The bandwidth of an ordering is defined as:
-\[B_f(G) = \text{max}_{uv \in E(G)}\{|f(u) - f(v)|\}.\]
+\begin{equation}
+B_f(G) = \max_{uv \in E(G)}\{|f(u) - f(v)|\}.
+\end{equation}
+
 The bandwidth of the graph $G$ is given by the bandwidth of the best possible ordering:
-\[B(G) = \text{min}\{B_f(G): f\; \text{ is\; a \;numbering\; of\; }G\}.\]
-We will be restricting ourselves to working with perfect numbering. maaz saeed gandu
+\begin{equation}
+B(G) = \text{min}\{B_f(G): f\; \text{ is\; a \;numbering\; of\; }G\}.    
+\end{equation}
+We will be restricting ourselves to working with perfect numbering.
 
 
 \subsubsection{Subsubsection Heading Here}
@@ -595,5 +602,6 @@ The authors would like to thank...
 
 % that's all folks
 \end{document}
+
 
 
