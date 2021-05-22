@@ -418,16 +418,24 @@ The abstract goes here.
 
 \section{Introduction}
 % no \IEEEPARstart
-Bandwidth is a basic, fundamental concept in Graph Theory, relating to almost any and every mathematical property possessed by a graph. The bandwidth of a graph refers to it's minimum bandwidth under any ordering; the bandwidth of the ordering of a graph is the maximum distance between two adjacent vertices.\\
+Bandwidth is a basic, fundamental concept in Graph Theory, relating to almost any and every mathematical property possessed by a graph. The bandwidth of a graph refers to it's minimum bandwidth under any ordering; the bandwidth of the ordering of a graph is the maximum distance between two adjacent vertices.
 \\
+The inception of the Graph Bandwidth Problem, occurred in the 1950s, when structural engineers attempted to analyze steel frameworks by their structural matrices, via computerized manipulation. The term 'bandwidth' was birthed as the engineers had endeavoured to discover a matrix in which all the non-zero elements lay withing a narrow 'band'. The inspiration for this came from operations such as inversion or finding determinant in as little time as possible.
 % You must have at least 2 lines in the paragraph with the drop letter
 % (should never be an issue)
+\\
 \textbf{Key terms:} Graph Theory, Bandwidth, Evolutionary Algorithms
  
-\hfill May 10, 2021
+\hfill May 26, 2021
 
-\subsection{Subsection Heading Here}
-Subsection text here.
+\subsection{Problem Definition}
+Let's define the problem in more formal terms with some added notation. 
+The mapping $f$ is defined as $f: V(G) \to \{1, 2, \dots, n\}$, where $n = |V|$ -- also called a \emph{perfect numbering}. \cite{Lee2016} Therefore, 
+we can think of these mappings as essentially orderings of the vertices. The bandwidth of an ordering is defined as:
+\[B_f(G) = \text{max}_{uv \in E(G)}\{|f(u) - f(v)|\}.\]
+The bandwidth of the graph $G$ is given by the bandwidth of the best possible ordering:
+\[B(G) = \text{min}\{B_f(G): f\; \text{ is\; a \;numbering\; of\; }G\}.\]
+We will be restricting ourselves to working with perfect numbering. maaz saeed gandu
 
 
 \subsubsection{Subsubsection Heading Here}
@@ -579,13 +587,8 @@ The authors would like to thank...
 % <OR> manually copy in the resultant .bbl file
 % set second argument of \begin to the number of references
 % (used to reserve space for the reference number labels box)
-\begin{thebibliography}{1}
-
-\bibitem{IEEEhowto:kopka}
-H.~Kopka and P.~W. Daly, \emph{A Guide to \LaTeX}, 3rd~ed.\hskip 1em plus
-  0.5em minus 0.4em\relax Harlow, England: Addison-Wesley, 1999.
-
-\end{thebibliography}
+\bibliographystyle{ieeetr}
+\bibliography{refs.bib}
 
 
 
