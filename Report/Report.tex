@@ -95,6 +95,8 @@
   % IEEE Computer Society needs nocompress option
   % requires cite.sty v4.0 or later (November 2003)
   \usepackage[nocompress]{cite}
+  \usepackage{graphicx}
+  
 \else
   % normal IEEE
   \usepackage{cite}
@@ -440,13 +442,41 @@ B_f(G) = \max_{uv \in E(G)}\{|f(u) - f(v)|\}.
 
 The bandwidth of the graph $G$ is given by the bandwidth of the best possible ordering:
 \begin{equation}
-B(G) = \text{min}\{B_f(G): f\; \text{ is\; a \;numbering\; of\; }G\}.    
+B(G) = \min\{B_f(G): f\; is\; a \;numbering\; of\; G\}.    
 \end{equation}
 We will be restricting ourselves to working with perfect numbering.
 
+\section{Preliminary Concepts}
+\subsection{Evolutionary Algorithms}
+Evolutionary Algorithms (also known as Genetic Algorithms) is a term referring to a family of algorithms based on the evolution we see around us, in nature. By mimicking learning, natural selection, reproduction, we can produce solutions for various search and optimization problems. This concept of evolving algorithms enables us to bypass the setbacks of traditional search / optimization algorithms.
 
-\subsubsection{Subsubsection Heading Here}
-Subsubsection text here.
+\subsubsection{Darwinian Evolution}
+Evolutionary Algorithms are derived of a simplified Darwinian evolution. The principles of such a cycle can be as such:
+\begin{enumerate}
+    \item \textbf{Variation} - Individual members of a given population may have differing attributes from one another, for example, physical appearance.
+    \item \textbf{Inheritance} - Offspring resemble their parents to certain extents. In this manner, traits are passed down from one generation to another; unrelated individuals are less likely to have common traits, as compared to them with their family trees.
+    \item \textbf{Selection} - Nature follows 'survival of the fittest' ideology. Individuals that are better able to locate and make use of resources compared to their peers, are more likely to survive in their respective environments. 
+\end{enumerate}
+In accordance with these principals, results that we obtain from our algorithm may or may not resemble those of previous iterations. With careful manipulation of parameters, solutions produced by our code can be ranked higher or lower than others.
+\subsubsection{Analogies}
+Where Darwinian evolution maintains a population of individual solutions, genetic algorithms maintain \textbf{individuals} - a population of candidate solutions \cite{Wiransky-GA}. The theory behind these algorithms is that solutions are produced, and improved upon, by iteratively re-producing newer generations of solutions.
+\\
+The various components of an evolutionary algorithm are as follows:
+\begin{enumerate}
+    \item \textbf{Genotype} - In nature, genotypes are collections of genes. When two individuals procreate, a mixture of genes from both, will make up the chromosomes of the offspring. In code, these \textbf{chromosomes} can be expressed, for example, as strings in binary. 
+    \item \textbf{Population} - Population refers to the collection of chromosomes. At any given moment, the algorithm will maintain a population of individuals - candidate solutions for the problem that is being attempted to be solved. In a nutshell, it is the current generation, which will be replaced by the next generation of offspring. 
+    \item \textbf{Fitness Function} - a function used to evaluate individuals in a given population. Individuals that produce better results, will be more favoured when it comes to selection for breeding of newer generations. As this cycle runs, individuals display continuous improvement until a satisfactory solution to our problem is found, at which point we can terminate the operation.
+    \item \textbf{Selection} - After individuals are evaluated and awarded a \textit{fitness value}, the best among them are chosen to breed and produce the newer generation. It is important to note that individuals with lower scores are still selected, but with lower probabilities, so as to not cause extinction of their respective attributes.
+    \item \textbf{Crossover} - refers to the mixing of chromosomes of the two parent individuals that were paired in the selection process to produce two new chromosomes (offspring). This process is also known as recombination.
+    \item \textbf{Mutation} - fulfills the purpose of periodically (at random; not in a set pattern) refreshing the population. This introduction of new patterns in the chromosomes encourages the algorithm to search in unexplored areas, rather than just exploiting what it has already chartered. The mutation may occur as random changes in chromosomes, for example, in binary string representation, a single bit may be switched.
+\end{enumerate}
+\paragraph{}
+\begin{center}
+\includegraphics[scale=0.4]{Report/EAflow.png}\\
+    Fig. 1: Flowchart of Evolutionary Algorithms
+\end{center}
+
+\subsection{NP-Completeness}
 
 
 % An example of a floating figure using the graphicx package.
@@ -566,7 +596,7 @@ The conclusion goes here.
 \fi
 
 
-The authors would like to thank...
+The authors would like to thank Kopka, Helmut and Daly, Patrick W. \cite{10.5555/940746} for their publicly available \LaTeX document template.
 
 
 
@@ -602,6 +632,3 @@ The authors would like to thank...
 
 % that's all folks
 \end{document}
-
-
-
