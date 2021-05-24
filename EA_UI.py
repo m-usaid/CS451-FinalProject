@@ -112,8 +112,8 @@ class MainWindow(QtWidgets.QMainWindow):
         plt.ylabel('Fitness')
         plt.title('EA graph analysis')
         plt.legend()
-        text = str(self.parent_ss) + '_' + str(self.survivor_ss) + '_' + str(
-            self.population_size) + '_' + str(self.offspring_size) + '_' + str(self.generations)
+        text = str(self.parent_ss_) + '_' + str(self.survivor_ss_) + '_' + str(
+            self.population_size_) + '_' + str(self.offspring_size_) + '_' + str(self.generations_)
         plt.savefig('results\_' + text + '.png',
                     facecolor='white', transparent=False)
         plt.clf
