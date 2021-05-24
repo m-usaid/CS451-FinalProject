@@ -22,6 +22,8 @@ class EA_imp():
     self.gen_num = 0
     self.iter_num = 0
     self.max_min = max_min
+    self.best_fitness = 0
+    self.avg_fitness = 0
     # self.genes = genes
     #missing parent and child ss selection
 
@@ -335,9 +337,13 @@ class EA_imp():
       arr_y_BSF.append(self.BSF_table[gen_num][-1])
       arr_y_ASF.append(self.ASF_table[gen_num][-1])
     if self.max_min == 'min':
+      self.avg_fitness = min(arr_y_ASF)
+      self.best_fitness = min(arr_y_BSF)
       print("Best fitness so far =", min(arr_y_BSF))
       print("Best Average fitness so far =", min(arr_y_ASF))
     else:
+      self.avg_fitness = max(arr_y_ASF)
+      self.best_fitness = max(arr_y_BSF)
       print("Best fitness so far =", max(arr_y_BSF))
       print("Best Average fitness so far =", max(arr_y_ASF))
     return arr_x, arr_y_BSF, arr_y_ASF

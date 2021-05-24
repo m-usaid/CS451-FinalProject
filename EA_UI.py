@@ -1,4 +1,4 @@
-import graphBandwidth
+from graphBandwidth import graphBandwidth
 from evol_algo import EA_imp
 from generate_graphs import *
 
