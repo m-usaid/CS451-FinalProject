@@ -312,7 +312,8 @@ class EA_imp():
       self.end_of_iter()
     #self.show_result()
     arr_x, arr_y_BSF, arr_y_ASF = self.collect_info()
-    self.plot_graph(arr_x, arr_y_BSF, arr_y_ASF)
+    # self.plot_graph(arr_x, arr_y_BSF, arr_y_ASF)
+    return arr_x, arr_y_BSF, arr_y_ASF
 
   def show_result(self):
     print("BSF TABLE")
