@@ -94,9 +94,9 @@ class graphBandwidth(EA_imp):
         return individual
 
 # lst = [['1','3', '2', '6', '7', '5'], ['5', '4', '7', '6', '1', '3', '2']]
-bandy = graphBandwidth(m_Graph, 100, 5, 100, 0.1, 10, 'FPS', 'Truncation')
-# bandy.init_population()
-# bandy.parent_selection()
-bandy.run_algo()
+# bandy = graphBandwidth(m_Graph, 100, 5, 100, 0.1, 10, 'FPS', 'Truncation')
+# # bandy.init_population()
+# # bandy.parent_selection()
+# bandy.run_algo()
 # print(bandy.crossover([bandy.population[1][0], bandy.population[2][0]]))
 
