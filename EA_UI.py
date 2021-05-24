@@ -1,41 +1,29 @@
 import graphBandwidth
 from evol_algo import EA_imp
 from generate_graphs import *
-from matplotlib.figure import Figure
+
 from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from PyQt5 import QtCore, QtWidgets
-import sys
-import random
-import math
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 import pyqtgraph as pg
-import serial
-import time
-import traceback
-from datetime import datetime
 from PyQt5 import uic
-import numpy as np
 
+from matplotlib.figure import Figure
+import numpy as np
+import sys
+import random
+import math
 from random import seed
 from random import randint
 from random import random
 import matplotlib.pyplot as plt
-import numpy as np
-import math
 import copy
-import serial  # serial library
-import numpy
 import matplotlib
 from drawnow import *
-import time
-import traceback
-from datetime import datetime
-import sys
-import math
 matplotlib.use('Qt5Agg')
 
 
@@ -86,10 +74,6 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.ui.create_button.pressed.connect(self.create_graph)
         self.ui.save_button.pressed.connect(self.save_graph)
-        # self.ui.population_size.setMaximum(1000)
-        # self.ui.offspring_size.setMaximum(1000)
-        # self.ui.generations.setMaximum(5000)
-        # self.ui.mutation_rate.setMaximum(1.0)
 
     def create_graph(self):
         self.population_size_ = self.ui.population_size.value()
