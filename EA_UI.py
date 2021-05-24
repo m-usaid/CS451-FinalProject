@@ -1,5 +1,6 @@
 import graphBandwidth
-
+from evol_algo import EA_imp
+from generate_graphs import *
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
@@ -65,7 +66,9 @@ class MainWindow(QtWidgets.QMainWindow):
         # widget_placholder would hold the layout together
         self.ui.space_for_graph.setLayout(layout)
 
-        self.file_ = "f2_l-d_kp_20_878.txt"
+        # self.file_ = "f2_l-d_kp_20_878.txt"
+        graphs = generate_graphs(files)
+        self.testing_graph = graphs[0]
         self.population_size_ = 0
         self.offspring_size_ = 0
         self.generations_ = 0
@@ -98,7 +101,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.parent_ss_ = self.ui.parent_ss.currentText()
         self.survivor_ss_ = self.ui.survivor_ss.currentText()
         self.EA_obj_ = graphBandwidth(
-            self.file_, self.population_size_, self.offspring_size_, self.generations_, self.mutation_rate_, self.iterations_, self.parent_ss_, self.survivor_ss_)
+            self.testing_graph, self.population_size_, self.offspring_size_, self.generations_, self.mutation_rate_, self.iterations_, self.parent_ss_, self.survivor_ss_)
         self.arr_x_, self.arr_y_BSF_, self.arr_y_ASF_ = self.EA_obj_.run_algo()
         self.best_fitness_ = self.EA_obj_.best_fitness
         self.avg_fitness_ = self.EA_obj_.avg_fitness
@@ -116,12 +119,6 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def save_graph(self):
         pass
-
-    # def update_plot(self):
-    #     self.canvas.axes.cla()  # Clear the canvas.
-    #     self.canvas.axes.plot(self.xdata, self.ydata, 'r')
-    #     # Trigger the canvas to update and redraw.
-    #     self.canvas.draw()
 
 
 if __name__ == "__main__":  # Multiple threads called under the main function
