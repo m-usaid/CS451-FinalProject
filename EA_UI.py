@@ -102,7 +102,21 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.avg_fitness.setText(str(self.avg_fitness_))
 
     def save_graph(self):
-        pass
+        x = np.array(self.arr_x_)
+        y_BSF = np.array(self.arr_y_BSF_)
+        y_ASF = np.array(self.arr_y_ASF_)
+        y_bla = np.array([0 for i in range(len(self.arr_x_))])
+        plt.plot(x, y_BSF, label='Best Fitness so far')
+        plt.plot(x, y_ASF, label='Average Fitness so far')
+        plt.xlabel('Generation')
+        plt.ylabel('Fitness')
+        plt.title('EA graph analysis')
+        plt.legend()
+        text = str(self.parent_ss) + '_' + str(self.survivor_ss) + '_' + str(
+            self.population_size) + '_' + str(self.offspring_size) + '_' + str(self.generations)
+        plt.savefig('results\_' + text + '.png',
+                    facecolor='white', transparent=False)
+        plt.clf
 
 
 if __name__ == "__main__":  # Multiple threads called under the main function
