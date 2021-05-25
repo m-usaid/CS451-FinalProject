@@ -95,22 +95,12 @@ class EA_imp():
     return new_population
 
   def crossover(self, parent1, parent2):
-    pass
-
-  def crossover_operator_order1(self, parent_1, parent_2):
+    # different for all
     pass
 
   def mutation_operator(self, individual):
-    seed()
-    #choose random integer between 0 to 100
-    rand_num = randint(0, 100)
-    #if the integer is less than the mutation rate then mutate
-    if rand_num <= self.mutation_rate*100:
-      #pick two random indexes and swap their values
-      pos1 = randint(0, len(individual)-1)
-      pos2 = randint(0, len(individual)-1)
-      individual[pos1], individual[pos2] = individual[pos2], individual[pos1]
-    return individual
+    # different for all
+    pass
 
   def end_of_gen(self):
     #find the best fitness value in the generation
@@ -144,7 +134,7 @@ class EA_imp():
       self.BSF_table[gen][-1] = sum_BSF/(self.iter_num + 1)
       self.ASF_table[gen][-1] = sum_ASF/(self.iter_num + 1)
     self.iter_num += 1
-    print(self.iter_num)
+    # print(self.iter_num)
 
   def insertionSort(self, population):
     lst = []
@@ -243,7 +233,7 @@ class EA_imp():
 
   def run_algo(self):
     self.iter_num = 0
-    print(self.population)
+    # print(self.population)
     while self.iter_num < self.iterations:
       self.init_population()
       self.gen_num = 0
@@ -252,7 +242,9 @@ class EA_imp():
         self.population = self.survivor_selection()
         self.end_of_gen()
       self.end_of_iter()
-    #self.show_result()
+      best = min(self.population, key=lambda x: x[1])
+      print("Iteration " + str(self.iter_num) + ' : ' + str(best[1]))
+    # self.show_result()
     arr_x, arr_y_BSF, arr_y_ASF = self.collect_info()
     # self.plot_graph(arr_x, arr_y_BSF, arr_y_ASF)
     return arr_x, arr_y_BSF, arr_y_ASF

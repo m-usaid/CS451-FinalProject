@@ -3,8 +3,8 @@ from generate_graphs import *
 import random
 import copy
 
-graphs = generate_graphs(files)
-m_Graph = graphs[0]
+# graphs = generate_graphs(files)
+# m_Graph = graphs[0]
 
 class graphBandwidth(EA_imp):
     def __init__(self, graph, population_size, offspring_size, generations, mutation_rate, iterations, parent_ss, survivor_ss):
