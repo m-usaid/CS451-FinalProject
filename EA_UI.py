@@ -126,21 +126,21 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.avg_fitness.setText(str(self.avg_fitness_))
 
     def save_graph(self):
-        self.EA_obj_.plot_graph(self.arr_x_, self.arr_y_BSF_, self.arr_y_ASF_)
-        # x = np.array(self.arr_x_)
-        # y = np.array(self.arr_y_BSF_)
-        # y2 = np.array(self.arr_y_ASF_)
-        # plt.plot(x, y, label='Best Fitness')
-        # plt.plot(x, y2, label='Avg Fitness')
-        # plt.xlabel('Generation')
-        # plt.ylabel('Fitness')
-        # plt.title('EA graph analysis')
-        # plt.legend()
-        # text = str(self.parent_ss_) + '_' + str(self.survivor_ss_) + '_' + str(
-        #     self.population_size_) + '_' + str(self.offspring_size_) + '_' + str(self.generations_)
-        # plt.savefig('Results\_' + text + '.png',
-        #             facecolor='white', transparent=False)
-        # plt.clf()
+        # self.EA_obj_.plot_graph(self.arr_x_, self.arr_y_BSF_, self.arr_y_ASF_)
+        x = np.array(self.arr_x_)
+        y = np.array(self.arr_y_BSF_)
+        y2 = np.array(self.arr_y_ASF_)
+        plt.plot(x, y, label='Best Fitness')
+        plt.plot(x, y2, label='Avg Fitness')
+        plt.xlabel('Generation')
+        plt.ylabel('Fitness')
+        plt.title('EA graph analysis')
+        plt.legend()
+        text = str(self.parent_ss_) + '_' + str(self.survivor_ss_) + '_' + str(
+            self.population_size_) + '_' + str(self.offspring_size_) + '_' + str(self.generations_)
+        plt.savefig('Results\_' + text + '.png',
+                    facecolor='white', transparent=False)
+        plt.clf()
 
 
 if __name__ == "__main__":  # Multiple threads called under the main function
