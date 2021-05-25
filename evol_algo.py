@@ -24,15 +24,9 @@ class EA_imp():
     self.max_min = max_min
     self.best_fitness = 0
     self.avg_fitness = 0
-    # self.genes = genes
-    #missing parent and child ss selection
 
   def init_population(self):
-    # self.population = []
-    # for i in range(self.population_size):
-    #   individual = self.generate_individual() #individual = ([list of gene numbers], fitness)
-    #   fitness = self.fitness_function(individual) #calculate fitness of individual
-    #   self.population.append((individual, fitness))
+    # is different for all 
     pass 
   
   def check_repetition(self, chromosome, gene):
@@ -102,60 +96,6 @@ class EA_imp():
 
   def crossover(self, parent1, parent2):
     pass
-    # seed()
-    # size = len(self.Graph)
-    # #randomly select two cutoff points which a difference of 40% of the gene size between them
-    # cutoff1 = randint(0, size-1)
-    # cutoff2 = randint(0, size-1)
-    # while abs(cutoff1 - cutoff2) > int(0.4*size):
-    #   cutoff2 = randint(0, size-1)
-    # #demark the lower (l) cutoff point and higher (h) cutoff point
-    # l = -1
-    # h = -1
-    # if cutoff1 > cutoff2:
-    #   h = cutoff1
-    #   l = cutoff2
-    # else:
-    #   h = cutoff2
-    #   l = cutoff1
-    # #initialize two offspring
-    # offspring1 = [-1]*size
-    # offspring2 = [-1]*size
-    # #perform cross over operation where the segment between the cutoff points in
-    # #offspring1 comes from parent 1 and that outside of the cutoff points comes from
-    # #parent 2 and vice versa for offspring 2.
-    # offspring1[l:h] = parent1[l:h]
-    # offspring2[l:h] = parent2[l:h]
-    # n = abs(cutoff1 - cutoff2)
-    # i1 = copy.deepcopy(h)
-    # i2 = copy.deepcopy(h)
-    # j1 = copy.deepcopy(h)
-    # j2 = copy.deepcopy(h)
-    # while n != size:
-    #   while self.check_repetition(offspring1, parent2[i2]):
-    #     i2 += 1
-    #     if i2 == size:
-    #       i2 = 0
-    #   while self.check_repetition(offspring2, parent1[j2]):
-    #     j2 += 1
-    #     if j2 == size:
-    #       j2 = 0
-    #   offspring1[i1] = parent2[i2]
-    #   offspring2[j1] = parent1[j2]
-    #   i1 += 1
-    #   i2 += 1
-    #   j1 += 1
-    #   j2 += 1
-    #   if i1 == size:
-    #     i1 = 0
-    #   if j1 == size:
-    #     j1 = 0
-    #   if i2 == size:
-    #     i2 = 0
-    #   if j2 == size:
-    #     j2 = 0
-    #   n += 1
-    # return offspring1, offspring2
 
   def crossover_operator_order1(self, parent_1, parent_2):
     pass

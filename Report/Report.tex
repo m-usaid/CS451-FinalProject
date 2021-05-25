@@ -59,6 +59,9 @@
 % \documentclass[conference,compsoc]{../sty/IEEEtran}
 
 
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
 
 
 
@@ -436,6 +439,10 @@ The mapping $f$ is defined as $f: V(G) \to \{1, 2, \dots, n\}$, where $n = |V|$ 
 we can think of these mappings as essentially orderings of the vertices. The bandwidth of an ordering is defined as:
 \begin{equation}
 B_f(G) = \max_{uv \in E(G)}\{|f(u) - f(v)|\}.
+\end{equation}
+
+\begin{equation}
+  v_{ij}(t+1) = v_{ij}(t) + c_1r_{1j}(t)[y_{ij}(t)-x_{ij}(t)] + c_2r_{2j}(t)[\hat{y}(t) - x_{ij}(t)]
 \end{equation}
 
 The bandwidth of the graph $G$ is given by the bandwidth of the best possible ordering:
