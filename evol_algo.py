@@ -291,4 +291,9 @@ class EA_imp():
     plt.ylabel('Fitness')
     plt.title('EA graph analysis')
     plt.legend()
-    plt.show()
+    # plt.show()
+    text = str(self.parent_ss) + '_' + str(self.survivor_ss) + '_' + str(
+            self.population_size) + '_' + str(self.offspring_size) + '_' + str(self.generations)
+    plt.savefig('Results\_' + text + '.png',
+                    facecolor='white', transparent=False)
+    plt.clf()
