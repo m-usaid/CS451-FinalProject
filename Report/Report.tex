@@ -5,6 +5,9 @@
 \usepackage{amssymb}
 \usepackage{graphicx}
 \usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{lipsum}
+\usetikzlibrary{backgrounds}
 \setlength{\parskip}{0.4 em}
 \hypersetup{
     colorlinks=true,
@@ -166,15 +169,25 @@ The various components of an evolutionary algorithm are as follows:
     just exploiting what it has already chartered. The mutation may occur as random changes in chromosomes, for example, in binary string 
     representation, a single bit may be switched.
 \end{enumerate}
-
 \begin{figure}[h]
   \centering
-  \includegraphics[scale=0.4]{EAflow.png}\\
-    \caption{Flowchart of Evolutionary Algorithms}
+  \begin{tikzpicture}[framed]
+  \node[rectangle, draw=black] (A) at (0,0) {Initialization};
+  \node[rectangle, draw=black] (B) at (0,-1.5) {Selection};
+  \node[rectangle, draw=black] (C) at (0, -3) {Termination};
+  \node[rectangle, draw=black] (D) at (3.5, -0.75) {Mutation};
+  \node[rectangle, draw=black] (E) at (3.5, -2.25) {Crossover};
+  \draw[-latex] (A) -- (B);
+  \draw[-latex] (B) -- (C);
+  \draw[-latex] (B) to[bend right=25] (E);
+  \draw[-latex] (D) to[bend right=25] (B);
+  \draw[-latex] (E) to[bend right=25] (D);
+  \end{tikzpicture}
+  \caption{Flowchart of Evolutionary Algorithms}
 \end{figure}
-
 \section{Implementation Details}
-
+\subsection{Population Represenation}
+\lipsum[1]
 \section{Experimental Analysis}
 \subsection{Testing Methods}
 \subsection{Results}
