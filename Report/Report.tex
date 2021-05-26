@@ -119,9 +119,9 @@ The bandwidth problem itself is a special case of the quadratic bottleneck assig
 $\NP$-hard. It is also known that the bandwidth problem is $\NP$-hard to approximate which makes it impossible to find 
 an $O(1)$-approximation algorithm for the bandwidth problem. 
 
-Historically, there have been endeavours to decrease (see \cite{10.1145/800195.805928}, - \cite{sparse}), or minimize 
+Historically, there have been endeavours to decrease (see \cite{10.1145/800195.805928}, \cite{sparse}), or minimize 
 (see \cite{chen}, \cite{chen2}) 
-the bandwidth of large, spares matrices, effectively, by permuating rows and columns. 
+the bandwidth of large, spares matrices, effectively, by permuting rows and columns. 
 This has been translated to graph theory by Harary (see \cite{1973141}). 
 Papadimitriou proved that the minimization of the bandwidth of a matrix is an 
 \NP-complete problem. \cite{papadimitriou_1976}
@@ -237,7 +237,17 @@ the bandwidth $B_f(G)$ for a single numbering/ordering $f$.
 \subsection{Selection}
 \lipsum[1]
 \subsection{Crossover \& Mutation}
-We performed a two-point crossover,
+We performed a two-point crossover in order to bring genetic diversity to the 
+population. All offspring was generated using the crossover operation, i.e. no offspring 
+were copies of their parent chromosomes. A generic crossover 
+method could not be used since the numbering had to be unique\footnote{similar to the Travelling Salesperson Problem}.
+
+\begin{algorithm}
+\caption{Crossover}
+\begin{algorithmic}
+  
+\end{algorithmic}
+\end{algorithm}
 \section{Experimental Analysis}
 \subsection{Testing Methods}
 \subsection{Results}
