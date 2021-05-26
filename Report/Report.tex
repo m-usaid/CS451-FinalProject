@@ -4,6 +4,7 @@
 \usepackage{complexity}
 \usepackage{amssymb}
 \usepackage{graphicx}
+\usepackage{subcaption}
 \usepackage{hyperref}
 \usepackage{tikz}
 \usepackage{algorithm, algorithmic}
@@ -71,7 +72,7 @@ Email: mp04911@st.habib.edu.pk}}
 \IEEEpeerreviewmaketitle
 
 \section{Introduction} 
-The graph bandwidth is a well-studied problem in graph theory. It is a combinatorial optimzation problem where the objective 
+The graph bandwidth is a well-studied problem in graph theory. It is a combinatorial optimization problem where the objective 
 is to minimize the maximum distance between two vertices of a graph by finding a suitable labelling $f: V(G) \to \{1, 2, \dots, n\}$.
 There are two different forms of the bandwidth problem -- the bandwidth problem for graphs and the bandwidth problem for matrices. 
 Both versions of the problem are closely related since the graph version of the problem can be reduced to the matrix version using 
@@ -175,7 +176,6 @@ The various components of an evolutionary algorithm are as follows:
     \item \textbf{Mutation} - fulfills the purpose of periodically (at random; not in a set pattern) refreshing 
     the population. This introduction of new patterns in the chromosomes encourages the algorithm to search in unexplored areas, rather than 
     just exploiting what it has already chartered. The mutation may occur as random changes in chromosomes, for example, in binary string 
-    representation, a single bit may be switched.
 \end{enumerate}
 \begin{figure}[h]
   \centering
@@ -242,15 +242,72 @@ population. All offspring was generated using the crossover operation, i.e. no o
 were copies of their parent chromosomes. A generic crossover 
 method could not be used since the numbering had to be unique\footnote{similar to the Travelling Salesperson Problem}.
 
+This function was implemented using various methods for lists and 
+dictionaries that are available in 
+Python. We present a pseudocode for our procedure: 
+
 \begin{algorithm}
-\caption{Crossover}
-\begin{algorithmic}
-  
-\end{algorithmic}
+  \caption{Crossover}
+  \begin{algorithmic}[1]
+    \renewcommand{\algorithmicrequire}{\textbf{Input:}}
+    \renewcommand{\algorithmicensure}{\textbf{Output:}}
+    \REQUIRE Two parent chromosomes
+    \ENSURE Two child chromosomes
+    \STATE childA1, childA2, childB1, childB2 $\leftarrow [\;]$
+    \STATE numA, numB $\leftarrow$ Extract numberings from parent chromosomes
+    \STATE $a, b \leftarrow $ Randomly generate crossover points 
+    \STATE $n \leftarrow |V(G)|$
+    \FOR {$i \leftarrow a$ to $i \leftarrow b$}
+    \STATE childA1.\textsc{Add}(numA[$i$])
+    \STATE childB1.\textsc{Add}(numB[$i$])  
+    \ENDFOR 
+    \STATE childA2 $\leftarrow$ leftover items from numA 
+    \STATE childB2 $\leftarrow$ leftover items from numB
+    \STATE childA $\leftarrow$ childA2[:$a$] + childA1 + childA2[$b$:]  
+    \STATE childB $\leftarrow$ childB2[:$a$] + childB1 + childB2[$b$:]
+    \STATE childA $\leftarrow$ \textsc{CreateChild}(childA)
+    \STATE childB $\leftarrow$ \textsc{CreateChild}(childB)
+  \end{algorithmic}
 \end{algorithm}
+
+To further maintain genetic diversity to encourage exploration of the solution space, 
+we used a mutation operator. Based on a mutation probability rate that we keep 
+around 0.2, we mutate our offspring chromosomes by swapping the label of two 
+randomly chosen vertices. 
+
 \section{Experimental Analysis}
 \subsection{Testing Methods}
-\subsection{Results}
+\subsubsection{Various Selection Schema} There are several parameters that can be 
+controlled while implementing an evolutionary algorithm. 
+To investigate our results and to determine which selection schema work best, 
+we plotted different results by keeping some parameters constant. We kept the number of
+generations, the mutation rate, and the number of iterations constant. We varied the parent selection strategy and the 
+survivor selection strategy. For results, see Section \ref{results}.
+
+\subsubsection{Parameter Selection}  We kept some parameter values constant to test our implementation. The constant 
+values were as follows:
+\begin{enumerate}
+  \item \texttt{number\_of\_generations} = 700
+  \item \texttt{number\_of\_iterations} = 10
+  \item \texttt{population\_size} = 100
+  \item \texttt{offspring\_size} = 50
+  \item \texttt{mutation\_rate} = 0.2 
+\end{enumerate}
+
+\subsubsection{Graphic User Interface (GUI)} To make the solution widely accessible, we developed an interface 
+based on the \texttt{PyQT5} library. Our aim was to provide a user-friendly medium to run the algorithm and 
+view results without having to go through extensive code.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.475\textwidth]{UI.png}
+    \caption{Snippet of the program's GUI}
+    \label{fig:my_label}
+\end{figure}
+
+\subsection{Results} \label{results}
+We tested our algorithm on three different graphs, with 11, 23 and 100 vertices respectively. 
+For the sake of brevity, we have only included results which followed an elitism (truncation) survival scheme. 
+
 \section{Conclusion}
 The conclusion goes here.
 
