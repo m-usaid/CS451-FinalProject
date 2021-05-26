@@ -6,6 +6,7 @@
 \usepackage{graphicx}
 \usepackage{hyperref}
 \usepackage{tikz}
+\usepackage{algorithm, algorithmic}
 \usepackage{lipsum}
 \usetikzlibrary{backgrounds}
 \setlength{\parskip}{0.4 em}
@@ -61,7 +62,7 @@ The abstract goes here.
 
 \IEEEpeerreviewmaketitle
 
-\section{Introduction} \label{intro}
+\section{Introduction} 
 The graph bandwidth is a well-studied problem in graph theory. It is a combinatorial optimzation problem where the objective 
 is to minimize the maximum distance between two vertices of a graph by finding a suitable labelling $f: V(G) \to \{1, 2, \dots, n\}$.
 There are two different forms of the bandwidth problem -- the bandwidth problem for graphs and the bandwidth problem for matrices. 
@@ -82,7 +83,7 @@ in a hypercube, where it's vertices were words of the code \cite{10.2307/2946514
 R.R Kohrfage initialized his work on the graph bandwidth problem \cite{ccdg1982}. Finally, F. Harary 
 published the problem, as we know it today, officially \cite{https://doi.org/10.1002/bimj.19660080427}.
 
-\subsection{Formal Definition}
+\subsection{Formal Definition} \label{intro}
 In more formal terms, 
 the mapping $f$ is defined as $f: V(G) \to \{1, 2, \dots, n\}$, where $n = |V|$. This is also called 
 a \emph{proper numbering} of the graph $G$.\cite{Lee2016} Therefore, 
@@ -185,8 +186,49 @@ The various components of an evolutionary algorithm are as follows:
   \end{tikzpicture}
   \caption{Flowchart of Evolutionary Algorithms}
 \end{figure}
+\setlength{\parskip}{0 em}
 \section{Implementation Details}
 \subsection{Population Represenation}
+In our implementation, an individual chromosome in our population 
+is stored in the form of key-value pairs\footnote{In Python, this is implemented 
+as a dictionary}, where the key is the vertex and the value is the integer label 
+of the vertex. 
+\setlength{\parskip}{0.4 em}
+
+The population can be expressed as the set \[\{(v_i, f(v_i)): \; v_i \in V(G)\}\]
+where $v_i$ is a vertex in graph $G$ and $f(v_i)$ is the integer label of the 
+vertex. To initialize the population, we generated individuals using randomized numberings. 
+Therefore, each individual is a proper numbering of the graph (see Section \ref{intro}). While storing the numberings, 
+we also compute the fitness of each individual (see Section \ref{fit}) and store it along with 
+each individual. 
+
+\setlength{\parskip}{0 em}
+\subsection{Fitness Function} \label{fit}
+The fitness function in our implementation was derived simply from the problem. Each individual was a proper numbering 
+of the graph, and therefore, each individual had a corresponding bandwidth as described in Section \ref{intro}. Therefore, 
+we simply iterated over the edges of the graph and then found the maximum value. We can also say that we found 
+the bandwidth $B_f(G)$ for a single numbering/ordering $f$. 
+
+\begin{algorithm}
+\caption{Fitness Function}
+\begin{algorithmic}[1]
+  \renewcommand{\algorithmicrequire}{\textbf{Input:}}
+  \renewcommand{\algorithmicensure}{\textbf{Output:}}
+  \REQUIRE A chromosome
+  \ENSURE  The fitness (bandwidth) of the chromosome
+  \\ \textit{Initialize edge map: }
+  \STATE $A \leftarrow \{(uv): 0\} \; \; \; \forall uv \in E(G)$
+  \FOR {each $uv \in E(G)$}
+  \STATE $A[uv] \leftarrow \lvert f(u) - f(v) \rvert$
+  \ENDFOR
+  \STATE fitness $\leftarrow \max(A)$
+  \RETURN fitness 
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{Selection}
+\lipsum[1]
+\subsection{Crossover \& Mutation}
 \lipsum[1]
 \section{Experimental Analysis}
 \subsection{Testing Methods}
