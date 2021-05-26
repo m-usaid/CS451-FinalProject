@@ -5,6 +5,7 @@
 \usepackage{amssymb}
 \usepackage{graphicx}
 \usepackage{hyperref}
+\setlength{\parskip}{0.4 em}
 \hypersetup{
     colorlinks=true,
     linkcolor=blue,
@@ -95,11 +96,27 @@ The bandwidth of the graph $G$ is given by the bandwidth of the best possible nu
 Bandwidths can be computed using any integer mapping, however, to make our implementation 
 easier, we will be restricting ourselves to working with proper numberings only.
 
+There exist several known mathematical bounds that relate the bandwidth of a graph 
+to various graph theoretic properties. For example, it is a simple exercise to prove that 
+\[B(G) = n - 1\] where $G$ is a complete graph of the form $K_n$. Similarly, there are also bounds 
+relating the chromatic number and diameter with the bandwidth of the graph.  \cite{ccdg1982}
+
 \subsection{NP-Completeness of the bandwidth minimization problem}
 
-Historically, there have been endeavours to decrease (see \cite{10.1145/800195.805928}, - \cite{sparse}), or minimize (see \cite{chen}, \cite{chen2}) 
-the bandwidth of large, spares matrices, effectively, by permuating rows and columns. This has been translated to graph theory by Harary (see \cite{1973141}). 
-Papadimitriou in his paper, proves that the minimization of the bandwidth of a matrix is an \NP-complete problem. \cite{papadimitriou_1976}
+The bandwidth problem itself is a special case of the quadratic bottleneck assignment problem, which is known to be 
+$\NP$-hard. It is also known that the bandwidth problem is $\NP$-hard to approximate which makes it impossible to find 
+an $O(1)$-approximation algorithm for the bandwidth problem. 
+
+Historically, there have been endeavours to decrease (see \cite{10.1145/800195.805928}, - \cite{sparse}), or minimize 
+(see \cite{chen}, \cite{chen2}) 
+the bandwidth of large, spares matrices, effectively, by permuating rows and columns. 
+This has been translated to graph theory by Harary (see \cite{1973141}). 
+Papadimitriou proved that the minimization of the bandwidth of a matrix is an 
+\NP-complete problem. \cite{papadimitriou_1976}
+
+There are several heuristic algorithms for the bandwidth problems such as the Cuthill-McKee algorithm, and the 
+Gibbs-Poole-Stockmeyer algorithm.  Heuristic approaches are of interest to us since they will give us an 
+idea ad to how we can design appropriate meta-heuristic techniques to solve the bandwidth problem. 
 
 \section{Preliminary Concepts}
 \subsection{Evolutionary Algorithms}
@@ -167,18 +184,15 @@ The conclusion goes here.
 
 
 
-% use section* for acknowledgment
-\ifCLASSOPTIONcompsoc
-  % The Computer Society usually uses the plural form
-  \section*{Acknowledgments}
-\else
-  % regular IEEE prefers the singular form
-  \section*{Acknowledgment}
-\fi
+% % use section* for acknowledgment
+% \ifCLASSOPTIONcompsoc
+%   % The Computer Society usually uses the plural form
+%   \section*{Acknowledgments}
+% \else
+%   % regular IEEE prefers the singular form
+%   \section*{Acknowledgment}
+% \fi
 
-
-The authors would like to thank Kopka, Helmut and Daly, Patrick W. \cite{10.5555/940746} for their 
-publicly available \LaTeX document template.
 
 
 
