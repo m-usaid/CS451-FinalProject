@@ -22,15 +22,11 @@ class EA_imp():
     self.gen_num = 0
     self.iter_num = 0
     self.max_min = max_min
-    # self.genes = genes
-    #missing parent and child ss selection
+    self.best_fitness = 0
+    self.avg_fitness = 0
 
   def init_population(self):
-    # self.population = []
-    # for i in range(self.population_size):
-    #   individual = self.generate_individual() #individual = ([list of gene numbers], fitness)
-    #   fitness = self.fitness_function(individual) #calculate fitness of individual
-    #   self.population.append((individual, fitness))
+    # is different for all 
     pass 
   
   def check_repetition(self, chromosome, gene):
@@ -99,76 +95,12 @@ class EA_imp():
     return new_population
 
   def crossover(self, parent1, parent2):
-    pass
-    # seed()
-    # size = len(self.Graph)
-    # #randomly select two cutoff points which a difference of 40% of the gene size between them
-    # cutoff1 = randint(0, size-1)
-    # cutoff2 = randint(0, size-1)
-    # while abs(cutoff1 - cutoff2) > int(0.4*size):
-    #   cutoff2 = randint(0, size-1)
-    # #demark the lower (l) cutoff point and higher (h) cutoff point
-    # l = -1
-    # h = -1
-    # if cutoff1 > cutoff2:
-    #   h = cutoff1
-    #   l = cutoff2
-    # else:
-    #   h = cutoff2
-    #   l = cutoff1
-    # #initialize two offspring
-    # offspring1 = [-1]*size
-    # offspring2 = [-1]*size
-    # #perform cross over operation where the segment between the cutoff points in
-    # #offspring1 comes from parent 1 and that outside of the cutoff points comes from
-    # #parent 2 and vice versa for offspring 2.
-    # offspring1[l:h] = parent1[l:h]
-    # offspring2[l:h] = parent2[l:h]
-    # n = abs(cutoff1 - cutoff2)
-    # i1 = copy.deepcopy(h)
-    # i2 = copy.deepcopy(h)
-    # j1 = copy.deepcopy(h)
-    # j2 = copy.deepcopy(h)
-    # while n != size:
-    #   while self.check_repetition(offspring1, parent2[i2]):
-    #     i2 += 1
-    #     if i2 == size:
-    #       i2 = 0
-    #   while self.check_repetition(offspring2, parent1[j2]):
-    #     j2 += 1
-    #     if j2 == size:
-    #       j2 = 0
-    #   offspring1[i1] = parent2[i2]
-    #   offspring2[j1] = parent1[j2]
-    #   i1 += 1
-    #   i2 += 1
-    #   j1 += 1
-    #   j2 += 1
-    #   if i1 == size:
-    #     i1 = 0
-    #   if j1 == size:
-    #     j1 = 0
-    #   if i2 == size:
-    #     i2 = 0
-    #   if j2 == size:
-    #     j2 = 0
-    #   n += 1
-    # return offspring1, offspring2
-
-  def crossover_operator_order1(self, parent_1, parent_2):
+    # different for all
     pass
 
   def mutation_operator(self, individual):
-    seed()
-    #choose random integer between 0 to 100
-    rand_num = randint(0, 100)
-    #if the integer is less than the mutation rate then mutate
-    if rand_num <= self.mutation_rate*100:
-      #pick two random indexes and swap their values
-      pos1 = randint(0, len(individual)-1)
-      pos2 = randint(0, len(individual)-1)
-      individual[pos1], individual[pos2] = individual[pos2], individual[pos1]
-    return individual
+    # different for all
+    pass
 
   def end_of_gen(self):
     #find the best fitness value in the generation
@@ -202,7 +134,7 @@ class EA_imp():
       self.BSF_table[gen][-1] = sum_BSF/(self.iter_num + 1)
       self.ASF_table[gen][-1] = sum_ASF/(self.iter_num + 1)
     self.iter_num += 1
-    print(self.iter_num)
+    # print(self.iter_num)
 
   def insertionSort(self, population):
     lst = []
@@ -301,7 +233,7 @@ class EA_imp():
 
   def run_algo(self):
     self.iter_num = 0
-    print(self.population)
+    # print(self.population)
     while self.iter_num < self.iterations:
       self.init_population()
       self.gen_num = 0
@@ -310,9 +242,12 @@ class EA_imp():
         self.population = self.survivor_selection()
         self.end_of_gen()
       self.end_of_iter()
-    #self.show_result()
+      best = min(self.population, key=lambda x: x[1])
+      print("Iteration " + str(self.iter_num) + ' : ' + str(best[1]))
+    # self.show_result()
     arr_x, arr_y_BSF, arr_y_ASF = self.collect_info()
-    self.plot_graph(arr_x, arr_y_BSF, arr_y_ASF)
+    # self.plot_graph(arr_x, arr_y_BSF, arr_y_ASF)
+    return arr_x, arr_y_BSF, arr_y_ASF
 
   def show_result(self):
     print("BSF TABLE")
@@ -334,9 +269,13 @@ class EA_imp():
       arr_y_BSF.append(self.BSF_table[gen_num][-1])
       arr_y_ASF.append(self.ASF_table[gen_num][-1])
     if self.max_min == 'min':
+      self.avg_fitness = min(arr_y_ASF)
+      self.best_fitness = min(arr_y_BSF)
       print("Best fitness so far =", min(arr_y_BSF))
       print("Best Average fitness so far =", min(arr_y_ASF))
     else:
+      self.avg_fitness = max(arr_y_ASF)
+      self.best_fitness = max(arr_y_BSF)
       print("Best fitness so far =", max(arr_y_BSF))
       print("Best Average fitness so far =", max(arr_y_ASF))
     return arr_x, arr_y_BSF, arr_y_ASF
@@ -352,4 +291,9 @@ class EA_imp():
     plt.ylabel('Fitness')
     plt.title('EA graph analysis')
     plt.legend()
-    plt.show()
+    # plt.show()
+    text = str(self.parent_ss) + '_' + str(self.survivor_ss) + '_' + str(
+            self.population_size) + '_' + str(self.offspring_size) + '_' + str(self.generations)
+    plt.savefig('Results\_' + text + '.png',
+                    facecolor='white', transparent=False)
+    plt.clf()
