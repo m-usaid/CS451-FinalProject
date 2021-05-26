@@ -9,7 +9,7 @@
 \usepackage{algorithm, algorithmic}
 \usepackage{lipsum}
 \usetikzlibrary{backgrounds}
-\setlength{\parskip}{0.4 em}
+\setlength{\parskip}{0 em}
 \hypersetup{
     colorlinks=true,
     linkcolor=blue,
@@ -56,7 +56,15 @@ Email: mp04911@st.habib.edu.pk}}
 \maketitle
 
 \begin{abstract}
-The abstract goes here.
+  The Graph Bandwidth Problem, is an NP-Complete, lesser researched, special case of 
+  Quadratic Bottleneck Assignment problem. It is an optimization problem with the objective of 
+  minimizing distance between a pair of vertices of a graph. Save a few research papers from the 
+  20th century, the graph bandwidth problem has not enjoyed nearly the same spotlight in the world 
+  of research as other combinatorial problems, including the likes of Traveling Salesman and Knapsack problems. 
+  As students of Computational Intelligence, we found it imperative to explore the problem through the lens of 
+  Evolutionary Algorithms. Since the problem is NP-hard and can not be solved in constant time, there is great potential 
+  for a meta-heuristic approach. Our team aims to explore said potential by applying evolutionary 
+  algorithms to graphs of varying sizes, and deliver a user-friendly application that accurately approximates solutions.
 \end{abstract}
 \textbf{Keywords:} Graph Theory, Graph Bandwidth, Evolutionary Algorithms
 
@@ -122,14 +130,13 @@ There are several heuristic algorithms for the bandwidth problems such as the Cu
 Gibbs-Poole-Stockmeyer algorithm.  Heuristic approaches are of interest to us since they will give us an 
 idea ad to how we can design appropriate meta-heuristic techniques to solve the bandwidth problem. 
 
-\section{Preliminary Concepts}
-\subsection{Evolutionary Algorithms}
+\section{Evolutionary Algorithms}
 Evolutionary Algorithms (also known as Genetic Algorithms) is a term referring to a 
 family of algorithms based on the evolution we see around us, in nature. By mimicking learning, 
 natural selection, reproduction, we can produce solutions for various search and optimization problems. 
 This concept of evolving algorithms enables us to bypass the setbacks of traditional search / optimization algorithms.
 
-\subsubsection{Darwinian Evolution}
+\subsection{Darwinian Evolution}
 Evolutionary Algorithms are derived of a simplified Darwinian evolution. The principles of such a cycle can be as such:
 \begin{enumerate}
     \item \textbf{Variation} - Individual members of a given population may have differing attributes 
@@ -143,7 +150,7 @@ Evolutionary Algorithms are derived of a simplified Darwinian evolution. The pri
 In accordance with these principals, results that we obtain from our algorithm may or may not resemble those of 
 previous iterations. With careful manipulation of parameters, solutions produced by our code can be ranked 
 higher or lower than others.
-\subsubsection{Analogies}
+\subsection{Analogies}
 Where Darwinian evolution maintains a population of individual solutions, genetic algorithms maintain 
 \textbf{individuals} - a population of candidate solutions \cite{Wiransky-GA}. The theory behind these 
 algorithms is that solutions are produced, and improved upon, by iteratively re-producing newer generations of solutions.
@@ -218,6 +225,7 @@ the bandwidth $B_f(G)$ for a single numbering/ordering $f$.
   \ENSURE  The fitness (bandwidth) of the chromosome
   \\ \textit{Initialize edge map: }
   \STATE $A \leftarrow \{(uv): 0\} \; \; \; \forall uv \in E(G)$
+  \\ \textit{Compute fitness: }
   \FOR {each $uv \in E(G)$}
   \STATE $A[uv] \leftarrow \lvert f(u) - f(v) \rvert$
   \ENDFOR
@@ -229,7 +237,7 @@ the bandwidth $B_f(G)$ for a single numbering/ordering $f$.
 \subsection{Selection}
 \lipsum[1]
 \subsection{Crossover \& Mutation}
-\lipsum[1]
+We performed a two-point crossover,
 \section{Experimental Analysis}
 \subsection{Testing Methods}
 \subsection{Results}
