@@ -6,6 +6,7 @@
 \usepackage{graphicx}
 \usepackage{hyperref}
 \usepackage{tikz}
+\usepackage{algorithm, algorithmic}
 \usepackage{lipsum}
 \usetikzlibrary{backgrounds}
 \setlength{\parskip}{0.4 em}
@@ -55,15 +56,22 @@ Email: mp04911@st.habib.edu.pk}}
 \maketitle
 
 \begin{abstract}
-The Graph Bandwidth Problem, is an NP-Complete, lesser researched, special case of Quadratic Bottleneck Assignment problem. It is an optimization problem with the objective of minimizing distance between a pair of vertices of a graph. Save a few research papers from the 20th century, the graph bandwidth problem has not enjoyed nearly the same spotlight in the world of research as other combinatorial problems, including the likes of Traveling Salesman and Knapsack problems. As students of Computational Intelligence, we found it imperative to explore the problem through the lens of Evolutionary Algorithms. Since the problem is NP-hard and can not be solved in constant time, there is great potential for a meta-heuristic approach. Our team aims to explore said potential by applying evolutionary algorithms to graphs of varying sizes, and deliver a user-friendly application that accurately approximates solutions.
+  The Graph Bandwidth Problem, is an NP-Complete, lesser researched, special case of 
+  Quadratic Bottleneck Assignment problem. It is an optimization problem with the objective of 
+  minimizing distance between a pair of vertices of a graph. Save a few research papers from the 
+  20th century, the graph bandwidth problem has not enjoyed nearly the same spotlight in the world 
+  of research as other combinatorial problems, including the likes of Traveling Salesman and Knapsack problems. 
+  As students of Computational Intelligence, we found it imperative to explore the problem through the lens of 
+  Evolutionary Algorithms. Since the problem is NP-hard and can not be solved in constant time, there is great potential 
+  for a meta-heuristic approach. Our team aims to explore said potential by applying evolutionary 
+  algorithms to graphs of varying sizes, and deliver a user-friendly application that accurately approximates solutions.
 \end{abstract}
-\\
 \textbf{Keywords:} Graph Theory, Graph Bandwidth, Evolutionary Algorithms
 
 \IEEEpeerreviewmaketitle
 
-\section{Introduction} \label{intro}
-The graph bandwidth is a well-studied problem in graph theory. It is a combinatorial optimization problem where the objective 
+\section{Introduction} 
+The graph bandwidth is a well-studied problem in graph theory. It is a combinatorial optimzation problem where the objective 
 is to minimize the maximum distance between two vertices of a graph by finding a suitable labelling $f: V(G) \to \{1, 2, \dots, n\}$.
 There are two different forms of the bandwidth problem -- the bandwidth problem for graphs and the bandwidth problem for matrices. 
 Both versions of the problem are closely related since the graph version of the problem can be reduced to the matrix version using 
@@ -83,7 +91,7 @@ in a hypercube, where it's vertices were words of the code \cite{10.2307/2946514
 R.R Kohrfage initialized his work on the graph bandwidth problem \cite{ccdg1982}. Finally, F. Harary 
 published the problem, as we know it today, officially \cite{https://doi.org/10.1002/bimj.19660080427}.
 
-\subsection{Formal Definition}
+\subsection{Formal Definition} \label{intro}
 In more formal terms, 
 the mapping $f$ is defined as $f: V(G) \to \{1, 2, \dots, n\}$, where $n = |V|$. This is also called 
 a \emph{proper numbering} of the graph $G$.\cite{Lee2016} Therefore, 
@@ -111,7 +119,7 @@ The bandwidth problem itself is a special case of the quadratic bottleneck assig
 $\NP$-hard. It is also known that the bandwidth problem is $\NP$-hard to approximate which makes it impossible to find 
 an $O(1)$-approximation algorithm for the bandwidth problem. 
 
-Historically, there have been endeavours to decrease (see \cite{10.1145/800195.805928}, \cite{sparse}), or minimize 
+Historically, there have been endeavours to decrease (see \cite{10.1145/800195.805928}, - \cite{sparse}), or minimize 
 (see \cite{chen}, \cite{chen2}) 
 the bandwidth of large, spares matrices, effectively, by permuating rows and columns. 
 This has been translated to graph theory by Harary (see \cite{1973141}). 
@@ -120,7 +128,7 @@ Papadimitriou proved that the minimization of the bandwidth of a matrix is an
 
 There are several heuristic algorithms for the bandwidth problems such as the Cuthill-McKee algorithm, and the 
 Gibbs-Poole-Stockmeyer algorithm.  Heuristic approaches are of interest to us since they will give us an 
-idea as to how we can design appropriate meta-heuristic techniques to solve the bandwidth problem. 
+idea ad to how we can design appropriate meta-heuristic techniques to solve the bandwidth problem. 
 
 \section{Preliminary Concepts}
 \subsection{Evolutionary Algorithms}
@@ -186,8 +194,49 @@ The various components of an evolutionary algorithm are as follows:
   \end{tikzpicture}
   \caption{Flowchart of Evolutionary Algorithms}
 \end{figure}
+\setlength{\parskip}{0 em}
 \section{Implementation Details}
 \subsection{Population Represenation}
+In our implementation, an individual chromosome in our population 
+is stored in the form of key-value pairs\footnote{In Python, this is implemented 
+as a dictionary}, where the key is the vertex and the value is the integer label 
+of the vertex. 
+\setlength{\parskip}{0.4 em}
+
+The population can be expressed as the set \[\{(v_i, f(v_i)): \; v_i \in V(G)\}\]
+where $v_i$ is a vertex in graph $G$ and $f(v_i)$ is the integer label of the 
+vertex. To initialize the population, we generated individuals using randomized numberings. 
+Therefore, each individual is a proper numbering of the graph (see Section \ref{intro}). While storing the numberings, 
+we also compute the fitness of each individual (see Section \ref{fit}) and store it along with 
+each individual. 
+
+\setlength{\parskip}{0 em}
+\subsection{Fitness Function} \label{fit}
+The fitness function in our implementation was derived simply from the problem. Each individual was a proper numbering 
+of the graph, and therefore, each individual had a corresponding bandwidth as described in Section \ref{intro}. Therefore, 
+we simply iterated over the edges of the graph and then found the maximum value. We can also say that we found 
+the bandwidth $B_f(G)$ for a single numbering/ordering $f$. 
+
+\begin{algorithm}
+\caption{Fitness Function}
+\begin{algorithmic}[1]
+  \renewcommand{\algorithmicrequire}{\textbf{Input:}}
+  \renewcommand{\algorithmicensure}{\textbf{Output:}}
+  \REQUIRE A chromosome
+  \ENSURE  The fitness (bandwidth) of the chromosome
+  \\ \textit{Initialize edge map: }
+  \STATE $A \leftarrow \{(uv): 0\} \; \; \; \forall uv \in E(G)$
+  \FOR {each $uv \in E(G)$}
+  \STATE $A[uv] \leftarrow \lvert f(u) - f(v) \rvert$
+  \ENDFOR
+  \STATE fitness $\leftarrow \max(A)$
+  \RETURN fitness 
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{Selection}
+\lipsum[1]
+\subsection{Crossover \& Mutation}
 \lipsum[1]
 \section{Experimental Analysis}
 \subsection{Testing Methods}
