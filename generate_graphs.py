@@ -27,7 +27,7 @@ def draw_graph(G: nx.Graph):
 
 files = [
     'Data/myciel3.col',
-    'Data/myciel4.col',
+    'Data/myciel5.col',
     'Data/gcol1.txt',
     'Data/gcol23.txt'
     ]
