@@ -82,6 +82,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.arr_y_ASF_ = []
         self.best_fitness_ = 0
         self.avg_fitness_ = 0
+        self.num_vertice = ''
 
         self.show()
 
@@ -91,12 +92,16 @@ class MainWindow(QtWidgets.QMainWindow):
     def select_graph(self):
         if self.ui.type_of_graph.currentText() == '11 vertices':
             self.testing_graph = self.graphs[0]
+            self.num_vertice = '11'
         elif self.ui.type_of_graph.currentText() == '23 vertices':
             self.testing_graph = self.graphs[1]
+            self.num_vertice = '23'
         elif self.ui.type_of_graph.currentText() == '100 vertices':
             self.testing_graph = self.graphs[2]
+            self.num_vertice = '100'
         else:
             self.testing_graph = self.graphs[3]
+            self.num_vertice = '300'
     
     def create_graph(self):
         self.select_graph()
@@ -130,13 +135,17 @@ class MainWindow(QtWidgets.QMainWindow):
         x = np.array(self.arr_x_)
         y = np.array(self.arr_y_BSF_)
         y2 = np.array(self.arr_y_ASF_)
-        plt.plot(x, y, label='Best Fitness')
-        plt.plot(x, y2, label='Avg Fitness')
+        plt.clf()
+        plt.plot(x, y, label='Best Fitness so far')
+        plt.plot(x, y2, label='Average Fitness so far')
         plt.xlabel('Generation')
         plt.ylabel('Fitness')
-        plt.title('EA graph analysis')
+        plt.title('EA graph analysis \n Best fitness = ' + str(self.best_fitness_) + ', Average Fitness = ' + str(self.avg_fitness_))
         plt.legend()
-        text = str(self.parent_ss_) + '_' + str(self.survivor_ss_) + '_' + str(
+        # txt = 'Number of Vertices = ' + self.num_vertice + ', Parent Selection Scheme = ' + str(self.parent_ss_) + ', Survivor Selection Scheme = ' + str(self.survivor_ss_) + ', Population size = ' + str(self.population_size_) + ', Offspring size = ' + str(self.offspring_size_) + ', No. of Generations = ' + str(self.generations_)
+        # fig = plt.figure()
+        # fig.text(.5, .05, txt, ha='center')
+        text = self.num_vertice + '_' + str(self.parent_ss_) + '_' + str(self.survivor_ss_) + '_' + str(
             self.population_size_) + '_' + str(self.offspring_size_) + '_' + str(self.generations_)
         plt.savefig('Results\_' + text + '.png',
                     facecolor='white', transparent=False)
