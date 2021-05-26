@@ -9,7 +9,7 @@
 \usepackage{algorithm, algorithmic}
 \usepackage{lipsum}
 \usetikzlibrary{backgrounds}
-\setlength{\parskip}{0.4 em}
+\setlength{\parskip}{0 em}
 \hypersetup{
     colorlinks=true,
     linkcolor=blue,
@@ -119,9 +119,9 @@ The bandwidth problem itself is a special case of the quadratic bottleneck assig
 $\NP$-hard. It is also known that the bandwidth problem is $\NP$-hard to approximate which makes it impossible to find 
 an $O(1)$-approximation algorithm for the bandwidth problem. 
 
-Historically, there have been endeavours to decrease (see \cite{10.1145/800195.805928}, - \cite{sparse}), or minimize 
+Historically, there have been endeavours to decrease (see \cite{10.1145/800195.805928}, \cite{sparse}), or minimize 
 (see \cite{chen}, \cite{chen2}) 
-the bandwidth of large, spares matrices, effectively, by permuating rows and columns. 
+the bandwidth of large, spares matrices, effectively, by permuting rows and columns. 
 This has been translated to graph theory by Harary (see \cite{1973141}). 
 Papadimitriou proved that the minimization of the bandwidth of a matrix is an 
 \NP-complete problem. \cite{papadimitriou_1976}
@@ -130,14 +130,13 @@ There are several heuristic algorithms for the bandwidth problems such as the Cu
 Gibbs-Poole-Stockmeyer algorithm.  Heuristic approaches are of interest to us since they will give us an 
 idea ad to how we can design appropriate meta-heuristic techniques to solve the bandwidth problem. 
 
-\section{Preliminary Concepts}
-\subsection{Evolutionary Algorithms}
+\section{Evolutionary Algorithms}
 Evolutionary Algorithms (also known as Genetic Algorithms) is a term referring to a 
 family of algorithms based on the evolution we see around us, in nature. By mimicking learning, 
 natural selection, reproduction, we can produce solutions for various search and optimization problems. 
 This concept of evolving algorithms enables us to bypass the setbacks of traditional search / optimization algorithms.
 
-\subsubsection{Darwinian Evolution}
+\subsection{Darwinian Evolution}
 Evolutionary Algorithms are derived of a simplified Darwinian evolution. The principles of such a cycle can be as such:
 \begin{enumerate}
     \item \textbf{Variation} - Individual members of a given population may have differing attributes 
@@ -151,7 +150,7 @@ Evolutionary Algorithms are derived of a simplified Darwinian evolution. The pri
 In accordance with these principals, results that we obtain from our algorithm may or may not resemble those of 
 previous iterations. With careful manipulation of parameters, solutions produced by our code can be ranked 
 higher or lower than others.
-\subsubsection{Analogies}
+\subsection{Analogies}
 Where Darwinian evolution maintains a population of individual solutions, genetic algorithms maintain 
 \textbf{individuals} - a population of candidate solutions \cite{Wiransky-GA}. The theory behind these 
 algorithms is that solutions are produced, and improved upon, by iteratively re-producing newer generations of solutions.
@@ -176,7 +175,6 @@ The various components of an evolutionary algorithm are as follows:
     \item \textbf{Mutation} - fulfills the purpose of periodically (at random; not in a set pattern) refreshing 
     the population. This introduction of new patterns in the chromosomes encourages the algorithm to search in unexplored areas, rather than 
     just exploiting what it has already chartered. The mutation may occur as random changes in chromosomes, for example, in binary string 
-    representation, a single bit may be switched.
 \end{enumerate}
 \begin{figure}[h]
   \centering
@@ -226,6 +224,7 @@ the bandwidth $B_f(G)$ for a single numbering/ordering $f$.
   \ENSURE  The fitness (bandwidth) of the chromosome
   \\ \textit{Initialize edge map: }
   \STATE $A \leftarrow \{(uv): 0\} \; \; \; \forall uv \in E(G)$
+  \\ \textit{Compute fitness: }
   \FOR {each $uv \in E(G)$}
   \STATE $A[uv] \leftarrow \lvert f(u) - f(v) \rvert$
   \ENDFOR
@@ -237,7 +236,43 @@ the bandwidth $B_f(G)$ for a single numbering/ordering $f$.
 \subsection{Selection}
 \lipsum[1]
 \subsection{Crossover \& Mutation}
-\lipsum[1]
+We performed a two-point crossover in order to bring genetic diversity to the 
+population. All offspring was generated using the crossover operation, i.e. no offspring 
+were copies of their parent chromosomes. A generic crossover 
+method could not be used since the numbering had to be unique\footnote{similar to the Travelling Salesperson Problem}.
+
+This function was implemented using various methods for lists and 
+dictionaries that are available in 
+Python. We present a pseudocode for our procedure: 
+
+\begin{algorithm}
+  \caption{Crossover}
+  \begin{algorithmic}[1]
+    \renewcommand{\algorithmicrequire}{\textbf{Input:}}
+    \renewcommand{\algorithmicensure}{\textbf{Output:}}
+    \REQUIRE Two parent chromosomes
+    \ENSURE Two child chromosomes
+    \STATE childA1, childA2, childB1, childB2 $\leftarrow [\;]$
+    \STATE numA, numB $\leftarrow$ Extract numberings from parent chromosomes
+    \STATE $a, b \leftarrow $ Randomly generate crossover points 
+    \STATE $n \leftarrow |V(G)|$
+    \FOR {$i \leftarrow a$ to $i \leftarrow b$}
+    \STATE childA1.\textsc{Add}(numA[$i$])
+    \STATE childB1.\textsc{Add}(numB[$i$])  
+    \ENDFOR 
+    \STATE childA2 $\leftarrow$ leftover items from numA 
+    \STATE childB2 $\leftarrow$ leftover items from numB
+    \STATE childA $\leftarrow$ childA2[:$a$] + childA1 + childA2[$b$:]  
+    \STATE childB $\leftarrow$ childB2[:$a$] + childB1 + childB2[$b$:]
+    \STATE childA $\leftarrow$ \textsc{CreateChild}(childA)
+    \STATE childB $\leftarrow$ \textsc{CreateChild}(childB)
+  \end{algorithmic}
+\end{algorithm}
+
+To further maintain genetic diversity to encourage exploration of the solution space, 
+we used a mutation operator. Based on a mutation probability rate that we keep 
+around 0.2, we call 
+
 \section{Experimental Analysis}
 \subsection{Testing Methods}
 \subsection{Results}
