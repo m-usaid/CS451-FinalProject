@@ -233,14 +233,14 @@
          <item>
           <widget class="QPushButton" name="create_button">
            <property name="text">
-            <string>Create Graph</string>
+            <string>Create Plot</string>
            </property>
           </widget>
          </item>
          <item>
           <widget class="QPushButton" name="save_button">
            <property name="text">
-            <string>Save Graph</string>
+            <string>Save Plot</string>
            </property>
           </widget>
          </item>
