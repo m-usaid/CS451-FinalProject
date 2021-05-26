@@ -285,6 +285,7 @@ class EA_imp():
     y_BSF = np.array(arr_y_BSF)
     y_ASF = np.array(arr_y_ASF)
     y_bla = np.array([0 for i in range(len(arr_x))])
+    plt.clf()
     plt.plot(x, y_BSF, label = 'Best Fitness so far')
     plt.plot(x, y_ASF, label = 'Average Fitness so far')
     plt.xlabel('Generation')
