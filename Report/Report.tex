@@ -433,9 +433,10 @@ mostly in the 450-750 range due to varied convergence. We present the results he
   \caption*{Figure 5: Results of EA applied to 100-vertex graph}
 \end{figure}
 
+\newpage
 \setlength{\parskip}{0 em}
 \section{Conclusion}
-Judging by the results in Section \ref{results}, we can see that the graph bandwidth problem is not easy to solve. 
+Judging by the results in Section \ref{results} -- summarized in \ref{table1}, we can see that the graph bandwidth problem is not easy to solve. 
 While we could obtain numberings for the graphs with 12 and 23 vertices, it was quite hard to do so with the graph with 
 100 vertices. This particular graph was also dense, which made the bandwidth quite high and difficult to minimize. On the 
 other hand, the problem shows promising results if the graph itself is relatively sparse. For smaller graphs, the choice of 
@@ -462,6 +463,31 @@ The accompanying code for this project can be accessed at \texttt{\url{https://g
 We would like to acknowledge the freely available datasets that we obtained from two different online resources. The graphs 
 were obtained from \texttt{\url{https://mat.gsia.cmu.edu/COLOR/instances/}} and 
 \texttt{\url{http://people.brunel.ac.uk/~mastjjb/jeb/orlib/colourinfo.html}}.
+
+\clearpage
+\begin{table}[]
+\begin{center}
+\begin{tabular}{|l|l|l|l|l|l|l|l|}
+\hline
+Vertices & Parent Selection Scheme & Survival Selection Scheme & Population & Offspring & Generations & Best Fitness & Average Fitness \\ \hline
+11       & Binary Tournament       & Truncation                & 100        & 50        & 700         & 6.4          & 6.5             \\ \hline
+11       & Fitness Proportionate   & Truncation                & 100        & 50        & 450         & 6.6          & 6.8             \\ \hline
+11       & Rank Based              & Truncation                & 100        & 50        & 700         & 6.6          & 6.7             \\ \hline
+11       & Truncation              & Truncation                & 100        & 50        & 400         & 6.8          & 6.927           \\ \hline
+23       & Binary Tournament       & Truncation                & 100        & 50        & 750         & 17.0         & 17.845          \\ \hline
+23       & Fitness Proportionate   & Truncation                & 100        & 50        & 700         & 17.0         & 17.317          \\ \hline
+23       & Rank Based              & Truncation                & 100        & 50        & 750         & 17.5         & 18.566          \\ \hline
+23       & Random                  & Truncation                & 100        & 50        & 500         & 17.3         & 18.308          \\ \hline
+23       & Truncation              & Truncation                & 100        & 50        & 500         & 17.5         & 18.165          \\ \hline
+100      & Binary Tournament       & Truncation                & 200        & 100       & 500         & 91.3         & 93.196          \\ \hline
+100      & Rank Based              & Truncation                & 200        & 100       & 500         & 91.4         & 93.469          \\ \hline
+100      & Random                  & Truncation                & 200        & 100       & 500         & 91.5         & 93.346          \\ \hline
+100      & Truncation              & Truncation                & 200        & 100       & 500         & 91.5         & 93.682          \\ \hline
+\end{tabular}
+\end{center}
+\caption{Table summarizing best and average fitness values.}
+\label{table1}
+\end{table}
 
 \bibliographystyle{ieeetr}
 \bibliography{refs.bib}
