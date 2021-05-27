@@ -117,7 +117,7 @@ to various graph theoretic properties. For example, it is a simple exercise to p
 \[B(G) = n - 1\] where $G$ is a complete graph of the form $K_n$. Similarly, there are also bounds 
 relating the chromatic number and diameter with the bandwidth of the graph.  \cite{ccdg1982}
 
-\subsection{NP-Completeness of the bandwidth problem}
+\subsection{NP-Completeness of the bandwidth problem} \label{npp}
 
 The bandwidth problem itself is a special case of the quadratic bottleneck assignment problem, which is known to be 
 $\NP$-hard. It is also known that the bandwidth problem is $\NP$-hard to approximate which makes it impossible to find 
@@ -180,7 +180,7 @@ The various components of an evolutionary algorithm are as follows:
     the population. This introduction of new patterns in the chromosomes encourages the algorithm to search in unexplored areas, rather than 
     just exploiting what it has already chartered. The mutation may occur as random changes in chromosomes, for example, in binary string 
 \end{enumerate}
-\begin{figure}[h]
+\begin{figure}[ht]
   \centering
   \begin{tikzpicture}[framed]
   \node[rectangle, draw=black] (A) at (0,0) {Initialization};
@@ -346,88 +346,119 @@ averaged over 10 iterations. We present the results below:
   \centering 
   \begin{subfigure}{0.34\textwidth}
     \includegraphics[width=\linewidth]{../Results/_11_FPS_Truncation_100_50_450.png}
-    \caption{what what}
+    \caption{Fitness-Proportional Selection}
+  \end{subfigure}
+  \begin{subfigure}{0.34\textwidth}
+    \includegraphics[width=\linewidth]{../Results/_11_RBS_Truncation_100_50_700.png}
+    \caption{Rank-Based Selection}
   \end{subfigure}
   \begin{subfigure}{0.34\textwidth}
     \includegraphics[width=\linewidth]{../Results/_11_BT_Truncation_100_50_700.png}
-    \caption{what what}
-  \end{subfigure}
-  \begin{subfigure}{0.34\textwidth}
-    \includegraphics[width=\linewidth]{../Results/_11_Random_Truncation_100_50_700.png}
-    \caption{what what}
+    \caption{Binary Tournament Selection}
   \end{subfigure}
   \label{fig:graphs1}
 \end{figure}
 \begin{figure}[htb]\ContinuedFloat
   \centering
   \begin{subfigure}{0.34\textwidth}
-    \includegraphics[width=\linewidth]{../Results/_11_RBS_Truncation_100_50_700.png}
-      \caption{what what}
+    \includegraphics[width=\linewidth]{../Results/_11_Truncation_Truncation_100_50_400.png}
+    \caption{Truncation/Elitism Selection}
   \end{subfigure}
-\begin{subfigure}{0.34\textwidth}
-  \includegraphics[width=\linewidth]{../Results/_11_Truncation_Truncation_100_50_400.png}
-    \caption{what what}
+  \begin{subfigure}{0.34\textwidth}
+    \includegraphics[width=\linewidth]{../Results/_11_Random_Truncation_100_50_700.png}
+    \caption{Random Selection}
 \end{subfigure}
 \caption*{Figure 3: Results of EA applied to 11-vertex graph}
 \label{fgigy}
 \end{figure}
 \newpage
 \begin{center}
-  \textbf{(ii) Testing on 23-vertices graph:}
+  \textbf{(iii) Testing on 23-vertices graph:}
 \end{center}
 \begin{figure}[h!]
   \centering 
   \begin{subfigure}{0.34\textwidth}
-    \includegraphics[width=\linewidth]{../Results/_11_FPS_Truncation_100_50_450.png}
-    \caption{what what}
+    \includegraphics[width=\linewidth]{../Results/_23_FPS_Truncation_100_50_700.png}
+    \caption{Fitness-Proportional Selection}
   \end{subfigure}
   \begin{subfigure}{0.34\textwidth}
-    \includegraphics[width=\linewidth]{../Results/_11_RBS_Truncation_100_50_700.png}
-    \caption{what what}
+    \includegraphics[width=\linewidth]{../Results/_23_RBS_Truncation_100_50_750.png}
+    \caption{Rank-Based Selection}
   \end{subfigure}
   \label{fig:graphs2}
 \end{figure}
 \begin{figure}\ContinuedFloat
   \centering
   \begin{subfigure}{0.34\textwidth}
-    \includegraphics[width=\linewidth]{../Results/_11_RBS_Truncation_100_50_700.png}
-    \caption{what what}
+    \includegraphics[width=\linewidth]{../Results/_23_BT_Truncation_100_50_750.png}
+    \caption{Binary Tournament Selection}
   \end{subfigure}
   \begin{subfigure}{0.34\textwidth}
-    \includegraphics[width=\linewidth]{../Results/_11_Truncation_Truncation_100_50_400.png}
-    \caption{what what}
+    \includegraphics[width=\linewidth]{../Results/_23_Truncation_Truncation_100_50_500.png}
+    \caption{Truncation/Elitism Selection}
   \end{subfigure}
   \begin{subfigure}{0.34\textwidth}
-    \includegraphics[width=\linewidth]{../Results/_11_Truncation_Truncation_100_50_400.png}
-    \caption{what what}
+    \includegraphics[width=\linewidth]{../Results/_23_Random_Truncation_100_50_500.png}
+    \caption{Random Selection}
   \end{subfigure}
-  \caption*{Figure 4: Results of EA applied to 11-vertex graph}
+  \caption*{Figure 4: Results of EA applied to 23-vertex graph}
 \end{figure}
 
 \newpage
 \begin{center}
   \textbf{(ii) Testing on 100-vertices graph:}
 \end{center}
-\begin{figure}
-  
+\begin{figure}[h!]
+  \centering 
+  \begin{subfigure}{0.34\textwidth}
+    \includegraphics[width=\linewidth]{../Results/_100_FPS_Truncation_100_50_700.png}
+    \caption{Fitness-Proportional Selection}
+  \end{subfigure}
+\end{figure}
+\begin{figure}[h!]\ContinuedFloat
+  \centering
+  \begin{subfigure}{0.34\textwidth}
+    \includegraphics[width=\linewidth]{../Results/_100_RBS_Truncation_200_100_500.png}
+    \caption{Rank-Based Selection}
+  \end{subfigure}
+  \begin{subfigure}{0.34\textwidth}
+    \includegraphics[width=\linewidth]{../Results/_100_BT_Truncation_200_100_500.png}
+    \caption{Binary Tournament Selection}
+  \end{subfigure}
+  \begin{subfigure}{0.34\textwidth}
+    \includegraphics[width=\linewidth]{../Results/_100_Truncation_Truncation_200_100_500.png}
+    \caption*{Truncation/Elitism Selection}
+  \end{subfigure}
+  \begin{subfigure}{0.34\textwidth}
+    \includegraphics[width=\linewidth]{../Results/_100_Random_Truncation_200_100_500.png}
+    \caption{Random Selection}
+  \end{subfigure}
+  \caption*{Figure 5: Results of EA applied to 100-vertex graph}
 \end{figure}
 \newpage
+\setlength{\parskip}{0 em}
 \section{Conclusion}
-The conclusion goes here.
+Judging by the results in Section \ref{results}, we can see that the graph bandwidth problem is not easy to solve. 
+While we could obtain numberings for the graphs with 12 and 23 vertices, it was quite hard to do so with the graph with 
+100 vertices. This particular graph was also dense, which made the bandwidth quite high and difficult to minimize. On the 
+other hand, the problem shows promising results if the graph itself is relatively sparse. For smaller graphs, the choice of 
+parent selection did not have much impact on the results. However, for larger graphs, truncation seemed to perform better.
+
+To further improve upon and to gain more understanding regarding evolutionary approaches to the bandwidth problem, 
+we suggest comparing the results of evolutionary algorithm solutions to this problem with results obtained 
+from heuristic algorithms described in Section \ref{npp}. Furthermore, we also plan on implementing different metaheuristics
+such as Ant Colony Optimization and more sophisticated forms of evolutionary computation in order to achieve better results.      
 
 % % use section* for acknowledgment
-% \ifCLASSOPTIONcompsoc
+\ifCLASSOPTIONcompsoc
 % % The Computer Society usually uses the plural form
-% \section*{Acknowledgments}
-% \else
-%   % regular IEEE prefers the singular form
-%   \section*{Acknowledgment}
-% \fi
-
-% I acknowledge you 
+\section*{Acknowledgments}
+\else
+  % regular IEEE prefers the singular form
+  \section*{Acknowledgment}
+\fi
 
 
-\newpage
 
 \bibliographystyle{ieeetr}
 \bibliography{refs.bib}
