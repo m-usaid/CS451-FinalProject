@@ -298,3 +298,23 @@ class EA_imp():
     plt.savefig('Results\_' + text + '.png',
                     facecolor='white', transparent=False)
     plt.clf()
+
+  def plot_graph_alt(self, arr_x, arr_y_BSF, arr_y_ASF):
+    x = np.array(arr_x)
+    y_BSF = np.array(arr_y_BSF)
+    y_ASF = np.array(arr_y_ASF)
+    y_bla = np.array([0 for i in range(len(arr_x))])
+    plt.clf()
+    plt.plot(x, y_BSF, label = 'Best Fitness so far')
+    plt.plot(x, y_ASF, label = 'Average Fitness so far')
+    plt.xlabel('Generation')
+    plt.ylabel('Fitness')
+    plt.title('EA graph analysis')
+    plt.show()
+      # plt.show()
+      # text = str(self.parent_ss) + '_' + str(self.survivor_ss) + '_' + str(
+      #         self.population_size) + '_' + str(self.offspring_size) + '_' + str(self.generations)
+      # plt.savefig('Results\_' + text + '.png',
+      #                 facecolor='white', transparent=False)
+      # plt.clf()
+
