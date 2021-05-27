@@ -4,6 +4,9 @@
 \usepackage{complexity}
 \usepackage{amssymb}
 \usepackage{graphicx}
+\usepackage{caption}
+\DeclareCaptionLabelFormat{cont}{#1~#2\alph{ContinuedFloat}}
+\captionsetup[ContinuedFloat]{labelformat=cont}
 \usepackage{subcaption}
 \usepackage{hyperref}
 \usepackage{tikz}
@@ -120,7 +123,7 @@ The bandwidth problem itself is a special case of the quadratic bottleneck assig
 $\NP$-hard. It is also known that the bandwidth problem is $\NP$-hard to approximate which makes it impossible to find 
 an $O(1)$-approximation algorithm for the bandwidth problem. 
 
-Historically, there have been endeavours to decrease (see \cite{10.1145/800195.805928}, \cite{sparse}), or minimize 
+Historically, there have been endeavors to decrease (see \cite{10.1145/800195.805928}, \cite{sparse}), or minimize 
 (see \cite{chen}, \cite{chen2}) 
 the bandwidth of large, spares matrices, effectively, by permuting rows and columns. 
 This has been translated to graph theory by Harary (see \cite{1973141}). 
@@ -128,7 +131,7 @@ Papadimitriou proved that the minimization of the bandwidth of a matrix is an
 \NP-complete problem. \cite{papadimitriou_1976}
 
 There are several heuristic algorithms for the bandwidth problems such as the Cuthill-McKee algorithm, and the 
-Gibbs-Poole-Stockmeyer algorithm.  Heuristic approaches are of interest to us since they will give us an 
+Gibbs-Poole-Stockmeyer algorithm. Heuristic approaches are of interest to us since they will give us an 
 idea ad to how we can design appropriate meta-heuristic techniques to solve the bandwidth problem. 
 
 \section{Evolutionary Algorithms}
@@ -193,7 +196,6 @@ The various components of an evolutionary algorithm are as follows:
   \end{tikzpicture}
   \caption{Flowchart of Evolutionary Algorithms}
 \end{figure}
-\setlength{\parskip}{0 em}
 \section{Implementation Details}
 \subsection{Population Represenation}
 In our implementation, an individual chromosome in our population 
@@ -235,19 +237,48 @@ the bandwidth $B_f(G)$ for a single numbering/ordering $f$.
 \end{algorithm}
 
 \subsection{Selection}
-\lipsum[1]
+We implemented several different selection schema for both parent selection, and 
+survivor selection. The schema we implemented were:
+\begin{enumerate}
+  \item \textit{Fitness-proportional Selection (FPS):} This selection scheme 
+  is also called roulette-wheel selection. Parent chromosomes are selected stochastically based on 
+  their fitness -- parents with a higher fitness value have a greater change of being selected. 
+  Since we are doing a minimization problem, we scale the fitness values in a way that individuals with a 
+  lower fitness have a higher chance of being selected.  
+  \item \textit{Rank-based Selection (RBS):} In RBS, we sort the population by their fitness values and 
+  create a rank ordering. The selection probabilities are determined based on ranking and not on actual 
+  fitness values which can help reduce selective pressure. 
+  \item \textit{Binary Tournament Selection (BT):} BT is a specific case of the more general tournament selection, 
+  where a group of individuals are selected from the population and then the best individual among the sample is returned. 
+  In binary tournament, two individuals are selected from the population randomly, and the more fit individual of the two 
+  is returned. This reduces the selective pressure since it does not let the fittest individual dominate. 
+  \item \textit{Truncation/Elitism:} In truncation, the population is ordered according to fitness values. The ranking 
+  depends on the nature of the problem -- minimization or maximation -- and the individuals with the worst values 
+  are truncated to maintain a given population size. 
+  \item \textit{Random Selection:} In this selection scheme, parents are selected randomly 
+  based on a uniform random distribution where each individual has the selection probability of 
+  $\frac{1}{n_p}$ where $n_p$ is the population size. 
+\end{enumerate}
+
+
 \subsection{Crossover \& Mutation}
 We performed a two-point crossover in order to bring genetic diversity to the 
 population. All offspring was generated using the crossover operation, i.e. no offspring 
 were copies of their parent chromosomes. A generic crossover 
 method could not be used since the numbering had to be unique\footnote{similar to the Travelling Salesperson Problem}.
 
-This function was implemented using various methods for lists and 
+This method was implemented using various methods for lists and 
 dictionaries that are available in 
-Python. We present a pseudocode for our procedure: 
+Python. We present a pseudocode for our procedure in Algorithm \ref{algo2}.
+
+To further maintain genetic diversity to encourage exploration of the solution space, 
+we used a mutation operator. Based on a mutation probability rate that we keep 
+around 0.2, we mutate our offspring chromosomes by swapping the label of two 
+randomly chosen vertices. 
 
 \begin{algorithm}
   \caption{Crossover}
+  \label{algo2}
   \begin{algorithmic}[1]
     \renewcommand{\algorithmicrequire}{\textbf{Input:}}
     \renewcommand{\algorithmicensure}{\textbf{Output:}}
@@ -270,24 +301,19 @@ Python. We present a pseudocode for our procedure:
   \end{algorithmic}
 \end{algorithm}
 
-To further maintain genetic diversity to encourage exploration of the solution space, 
-we used a mutation operator. Based on a mutation probability rate that we keep 
-around 0.2, we mutate our offspring chromosomes by swapping the label of two 
-randomly chosen vertices. 
 
 \section{Experimental Analysis}
 \subsection{Testing Methods}
 \subsubsection{Various Selection Schema} There are several parameters that can be 
 controlled while implementing an evolutionary algorithm. 
 To investigate our results and to determine which selection schema work best, 
-we plotted different results by keeping some parameters constant. We kept the number of
-generations, the mutation rate, and the number of iterations constant. We varied the parent selection strategy and the 
+we plotted different results by keeping some parameters constant. We kept the mutation rate, 
+and the number of iterations constant. The number of generations are changing because we  We varied the parent selection strategy and the 
 survivor selection strategy. For results, see Section \ref{results}.
 
 \subsubsection{Parameter Selection}  We kept some parameter values constant to test our implementation. The constant 
 values were as follows:
 \begin{enumerate}
-  \item \texttt{number\_of\_generations} = 700
   \item \texttt{number\_of\_iterations} = 10
   \item \texttt{population\_size} = 100
   \item \texttt{offspring\_size} = 50
@@ -299,7 +325,7 @@ based on the \texttt{PyQT5} library. Our aim was to provide a user-friendly medi
 view results without having to go through extensive code.
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.475\textwidth]{UI.png}
+    \includegraphics[width=0.45\textwidth]{UI.png}
     \caption{Snippet of the program's GUI}
     \label{fig:my_label}
 \end{figure}
@@ -307,25 +333,101 @@ view results without having to go through extensive code.
 \subsection{Results} \label{results}
 We tested our algorithm on three different graphs, with 11, 23 and 100 vertices respectively. 
 For the sake of brevity, we have only included results which followed an elitism (truncation) survival scheme. 
+We plotted the best fitness and the average fitnesses of the algorithm against each generation 
+averaged over 10 iterations. We present the results below:
+\setlength{\parskip}{1 em}
 
+\begin{center}
+  \textbf{(i) Testing on 11-vertices graph:}
+\end{center}
+\setlength{\parskip}{0 em}
+\begin{figure}[h]
+  \vspace{-1 em}
+  \centering 
+  \begin{subfigure}{0.34\textwidth}
+    \includegraphics[width=\linewidth]{../Results/_11_FPS_Truncation_100_50_450.png}
+    \caption{what what}
+  \end{subfigure}
+  \begin{subfigure}{0.34\textwidth}
+    \includegraphics[width=\linewidth]{../Results/_11_BT_Truncation_100_50_700.png}
+    \caption{what what}
+  \end{subfigure}
+  \begin{subfigure}{0.34\textwidth}
+    \includegraphics[width=\linewidth]{../Results/_11_Random_Truncation_100_50_700.png}
+    \caption{what what}
+  \end{subfigure}
+  \label{fig:graphs1}
+\end{figure}
+\begin{figure}[htb]\ContinuedFloat
+  \centering
+  \begin{subfigure}{0.34\textwidth}
+    \includegraphics[width=\linewidth]{../Results/_11_RBS_Truncation_100_50_700.png}
+      \caption{what what}
+  \end{subfigure}
+\begin{subfigure}{0.34\textwidth}
+  \includegraphics[width=\linewidth]{../Results/_11_Truncation_Truncation_100_50_400.png}
+    \caption{what what}
+\end{subfigure}
+\caption*{Figure 3: Results of EA applied to 11-vertex graph}
+\label{fgigy}
+\end{figure}
+\newpage
+\begin{center}
+  \textbf{(ii) Testing on 23-vertices graph:}
+\end{center}
+\begin{figure}[h!]
+  \centering 
+  \begin{subfigure}{0.34\textwidth}
+    \includegraphics[width=\linewidth]{../Results/_11_FPS_Truncation_100_50_450.png}
+    \caption{what what}
+  \end{subfigure}
+  \begin{subfigure}{0.34\textwidth}
+    \includegraphics[width=\linewidth]{../Results/_11_RBS_Truncation_100_50_700.png}
+    \caption{what what}
+  \end{subfigure}
+  \label{fig:graphs2}
+\end{figure}
+\begin{figure}\ContinuedFloat
+  \centering
+  \begin{subfigure}{0.34\textwidth}
+    \includegraphics[width=\linewidth]{../Results/_11_RBS_Truncation_100_50_700.png}
+    \caption{what what}
+  \end{subfigure}
+  \begin{subfigure}{0.34\textwidth}
+    \includegraphics[width=\linewidth]{../Results/_11_Truncation_Truncation_100_50_400.png}
+    \caption{what what}
+  \end{subfigure}
+  \begin{subfigure}{0.34\textwidth}
+    \includegraphics[width=\linewidth]{../Results/_11_Truncation_Truncation_100_50_400.png}
+    \caption{what what}
+  \end{subfigure}
+  \caption*{Figure 4: Results of EA applied to 11-vertex graph}
+\end{figure}
+
+\newpage
+\begin{center}
+  \textbf{(ii) Testing on 100-vertices graph:}
+\end{center}
+\begin{figure}
+  
+\end{figure}
+\newpage
 \section{Conclusion}
 The conclusion goes here.
 
-
-
 % % use section* for acknowledgment
 % \ifCLASSOPTIONcompsoc
-%   % The Computer Society usually uses the plural form
-%   \section*{Acknowledgments}
+% % The Computer Society usually uses the plural form
+% \section*{Acknowledgments}
 % \else
 %   % regular IEEE prefers the singular form
 %   \section*{Acknowledgment}
 % \fi
 
+% I acknowledge you 
 
 
-
-
+\newpage
 
 \bibliographystyle{ieeetr}
 \bibliography{refs.bib}
