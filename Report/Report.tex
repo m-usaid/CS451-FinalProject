@@ -17,10 +17,10 @@
 \hypersetup{
     colorlinks=true,
     linkcolor=blue,
-    filecolor=magenta,      
+    filecolor=magenta,
     urlcolor=blue,
 }
-\urlstyle{same}
+% \urlstyle{same}
 
 \ifCLASSOPTIONcompsoc
   % IEEE Computer Society needs nocompress option
@@ -60,18 +60,14 @@ Email: mp04911@st.habib.edu.pk}}
 \maketitle
 
 \begin{abstract}
-  The Graph Bandwidth Problem, is an NP-Complete, lesser researched, special case of 
-  Quadratic Bottleneck Assignment problem. It is an optimization problem with the objective of 
-  minimizing distance between a pair of vertices of a graph. Save a few research papers from the 
-  20th century, the graph bandwidth problem has not enjoyed nearly the same spotlight in the world 
-  of research as other combinatorial problems, including the likes of Traveling Salesman and Knapsack problems. 
-  As students of Computational Intelligence, we found it imperative to explore the problem through the lens of 
-  Evolutionary Algorithms. Since the problem is NP-hard and can not be solved in constant time, there is great potential 
-  for a meta-heuristic approach. Our team aims to explore said potential by applying evolutionary 
-  algorithms to graphs of varying sizes, and deliver a user-friendly application that accurately approximates solutions.
+  The bandwidth problem for a graph is an NP-complete problem. Almost identical to the 
+  bandwidth problem for matrices, it finds applications in sparse matrix handling, and electronic design 
+  automation. It is a combinatorial optimization problem which is also NP-hard to approximate. Therefore, 
+  we attempt to solve the bandwidth problem using a basic evolutionary algorithm and observe the results obtained. 
 \end{abstract}
-\textbf{Keywords:} Graph Theory, Graph Bandwidth, Evolutionary Algorithms
-
+% \setlength{\parskip}{0.5 em}
+\noindent \textit{\textbf{\small Keywords---}}{\small Graph Theory, Bandwidth, Graph Bandwidth, Evolutionary Algorithms}
+% \setlength{\parskip}{0 em}
 \IEEEpeerreviewmaketitle
 
 \section{Introduction} 
@@ -132,13 +128,13 @@ Papadimitriou proved that the minimization of the bandwidth of a matrix is an
 
 There are several heuristic algorithms for the bandwidth problems such as the Cuthill-McKee algorithm, and the 
 Gibbs-Poole-Stockmeyer algorithm. Heuristic approaches are of interest to us since they will give us an 
-idea ad to how we can design appropriate meta-heuristic techniques to solve the bandwidth problem. 
+idea as to how we can design appropriate meta-heuristic techniques to solve the bandwidth problem. 
 
 \section{Evolutionary Algorithms}
-Evolutionary Algorithms (also known as Genetic Algorithms) is a term referring to a 
-family of algorithms based on the evolution we see around us, in nature. By mimicking learning, 
-natural selection, reproduction, we can produce solutions for various search and optimization problems. 
-This concept of evolving algorithms enables us to bypass the setbacks of traditional search / optimization algorithms.
+Evolutionary Algorithms is a term referring to a 
+family of algorithms based on the evolution we see around us in nature. By mimicking learning, 
+natural selection, and reproduction, we can produce solutions for various search and optimization problems. 
+This concept of evolving algorithms enables us to bypass the setbacks of traditional search/optimization algorithms.
 
 \subsection{Darwinian Evolution}
 Evolutionary Algorithms are derived of a simplified Darwinian evolution. The principles of such a cycle can be as such:
@@ -156,7 +152,7 @@ previous iterations. With careful manipulation of parameters, solutions produced
 higher or lower than others.
 \subsection{Analogies}
 Where Darwinian evolution maintains a population of individual solutions, genetic algorithms maintain 
-\textbf{individuals} - a population of candidate solutions \cite{Wiransky-GA}. The theory behind these 
+\textit{individuals} - a population of candidate solutions \cite{Wiransky-GA}. The theory behind these 
 algorithms is that solutions are produced, and improved upon, by iteratively re-producing newer generations of solutions.
 
 The various components of an evolutionary algorithm are as follows:
@@ -180,7 +176,7 @@ The various components of an evolutionary algorithm are as follows:
     the population. This introduction of new patterns in the chromosomes encourages the algorithm to search in unexplored areas, rather than 
     just exploiting what it has already chartered. The mutation may occur as random changes in chromosomes, for example, in binary string 
 \end{enumerate}
-\begin{figure}[ht]
+\begin{figure}[h]
   \centering
   \begin{tikzpicture}[framed]
   \node[rectangle, draw=black] (A) at (0,0) {Initialization};
@@ -265,7 +261,7 @@ survivor selection. The schema we implemented were:
 We performed a two-point crossover in order to bring genetic diversity to the 
 population. All offspring was generated using the crossover operation, i.e. no offspring 
 were copies of their parent chromosomes. A generic crossover 
-method could not be used since the numbering had to be unique\footnote{similar to the Travelling Salesperson Problem}.
+method could not be used since the numbering had to be unique\footnote{Similar to the Travelling Salesperson Problem.}.
 
 This method was implemented using various methods for lists and 
 dictionaries that are available in 
@@ -334,9 +330,10 @@ view results without having to go through extensive code.
 We tested our algorithm on three different graphs, with 11, 23 and 100 vertices respectively. 
 For the sake of brevity, we have only included results which followed an elitism (truncation) survival scheme. 
 We plotted the best fitness and the average fitnesses of the algorithm against each generation 
-averaged over 10 iterations. We present the results below:
+averaged over 10 iterations. The number of generations for each plot varied slightly although it lied 
+mostly in the 450-750 range due to varied convergence. We present the results here:
 \setlength{\parskip}{1 em}
-
+\newpage
 \begin{center}
   \textbf{(i) Testing on 11-vertices graph:}
 \end{center}
@@ -356,14 +353,14 @@ averaged over 10 iterations. We present the results below:
     \includegraphics[width=\linewidth]{../Results/_11_BT_Truncation_100_50_700.png}
     \caption{Binary Tournament Selection}
   \end{subfigure}
-  \label{fig:graphs1}
-\end{figure}
-\begin{figure}[htb]\ContinuedFloat
-  \centering
   \begin{subfigure}{0.34\textwidth}
     \includegraphics[width=\linewidth]{../Results/_11_Truncation_Truncation_100_50_400.png}
     \caption{Truncation/Elitism Selection}
   \end{subfigure}
+  \label{fig:graphs1}
+\end{figure}
+\begin{figure}\ContinuedFloat
+  \centering
   \begin{subfigure}{0.34\textwidth}
     \includegraphics[width=\linewidth]{../Results/_11_Random_Truncation_100_50_700.png}
     \caption{Random Selection}
@@ -386,13 +383,13 @@ averaged over 10 iterations. We present the results below:
     \caption{Rank-Based Selection}
   \end{subfigure}
   \label{fig:graphs2}
-\end{figure}
-\begin{figure}\ContinuedFloat
-  \centering
   \begin{subfigure}{0.34\textwidth}
     \includegraphics[width=\linewidth]{../Results/_23_BT_Truncation_100_50_750.png}
     \caption{Binary Tournament Selection}
   \end{subfigure}
+\end{figure}
+\begin{figure}\ContinuedFloat
+  \centering
   \begin{subfigure}{0.34\textwidth}
     \includegraphics[width=\linewidth]{../Results/_23_Truncation_Truncation_100_50_500.png}
     \caption{Truncation/Elitism Selection}
@@ -414,13 +411,13 @@ averaged over 10 iterations. We present the results below:
     \includegraphics[width=\linewidth]{../Results/_100_FPS_Truncation_100_50_700.png}
     \caption{Fitness-Proportional Selection}
   \end{subfigure}
-\end{figure}
-\begin{figure}[h!]\ContinuedFloat
-  \centering
   \begin{subfigure}{0.34\textwidth}
     \includegraphics[width=\linewidth]{../Results/_100_RBS_Truncation_200_100_500.png}
     \caption{Rank-Based Selection}
   \end{subfigure}
+\end{figure}
+\begin{figure}[h!]\ContinuedFloat
+  \centering
   \begin{subfigure}{0.34\textwidth}
     \includegraphics[width=\linewidth]{../Results/_100_BT_Truncation_200_100_500.png}
     \caption{Binary Tournament Selection}
@@ -435,7 +432,7 @@ averaged over 10 iterations. We present the results below:
   \end{subfigure}
   \caption*{Figure 5: Results of EA applied to 100-vertex graph}
 \end{figure}
-\newpage
+
 \setlength{\parskip}{0 em}
 \section{Conclusion}
 Judging by the results in Section \ref{results}, we can see that the graph bandwidth problem is not easy to solve. 
@@ -446,8 +443,12 @@ parent selection did not have much impact on the results. However, for larger gr
 
 To further improve upon and to gain more understanding regarding evolutionary approaches to the bandwidth problem, 
 we suggest comparing the results of evolutionary algorithm solutions to this problem with results obtained 
-from heuristic algorithms described in Section \ref{npp}. Furthermore, we also plan on implementing different metaheuristics
+from heuristic algorithms described in Section \ref{npp}, while also experimenting on different 
+types of graphs and testing whether already known mathematical results regarding the bandwidth problem 
+are being obeyed. Furthermore, we also plan on implementing different metaheuristics
 such as Ant Colony Optimization and more sophisticated forms of evolutionary computation in order to achieve better results.      
+
+The accompanying code for this project can be accessed at \texttt{\url{https://github.com/m-usaid/CS451-FinalProject}}. 
 
 % % use section* for acknowledgment
 \ifCLASSOPTIONcompsoc
@@ -458,7 +459,9 @@ such as Ant Colony Optimization and more sophisticated forms of evolutionary com
   \section*{Acknowledgment}
 \fi
 
-
+We would like to acknowledge the freely available datasets that we obtained from two different online resources. The graphs 
+were obtained from \texttt{\url{https://mat.gsia.cmu.edu/COLOR/instances/}} and 
+\texttt{\url{http://people.brunel.ac.uk/~mastjjb/jeb/orlib/colourinfo.html}}.
 
 \bibliographystyle{ieeetr}
 \bibliography{refs.bib}
